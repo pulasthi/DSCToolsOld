@@ -1,0 +1,13 @@
+﻿1.) Points files should reflect any merging of clusters.
+	E.g. say you have 9(7) with 0+2+6 then the cluster numbers should be,
+		 0,1,3,4,5 where 0 represents points for original 0+2+6
+		 In other words, we simply begin with a 9(5) case. In the final output
+		 indices are made to go continuous from 0 to some N resulting from 
+		 further divisions of clusters 0,1,3,4,5. 
+		 
+2.) Caveat: The output naming is such that C(N)_to_C(outN) so if you try different clustering
+			for clusters of the same C then it's possible to get equal outN values, which will make
+			a name conflict. E.g. take 13(5). Now try 13(5)_0(2), 13(5)_1(4). Also if we tried 13(5)_0(3) and 13(5)_1(3). 
+			Then outN would be 4 for both these cases :-/. Anyway, let's not worry about this now.
+
+3.) Join lists should be in increasing order of numbers. E.g. 0+2+3 is valid but 2+0+3 or 2+3+0 or any other combination is wrong

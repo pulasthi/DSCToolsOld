@@ -1,0 +1,7 @@
+﻿SequenceFile C:\Users\sekanaya\Desktop\junkmatrix\centers\mina_6822\100k_sample_fasta_clusters_21+5.fa
+DistFile	C:\Users\sekanaya\Desktop\junkmatrix\centers\mina_6822\distance_6822.bin
+Size	6822
+ClusterString	0,1,2,3,4,5,6,7,8,9
+DataType	0
+PointsFile	C:\Users\sekanaya\Desktop\junkmatrix\centers\mina_6822\SIMPLEpoints.txt
+OutputDir	C:\Users\sekanaya\Desktop\junkmatrix\centers\mina_6822

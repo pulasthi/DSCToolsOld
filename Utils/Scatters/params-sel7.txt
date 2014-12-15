@@ -1,0 +1,13 @@
+﻿dataDir	G:\SugarSyncSharedByMe\SalsaBio\cog\100k\manxcat\blast\untrans\Manxcat_cog_first_50k\meandistance
+dataFilePrefix	pair_distances_for_all_sel7_clusters
+xmaxbound	1.5
+ymaxbound	1.5
+xres	50
+yres	50
+mult	100
+alpha	2
+method	power
+xdiv	1
+pcutf	0.85
+ncutf	-inf
+zto1	True

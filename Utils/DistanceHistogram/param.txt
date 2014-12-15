@@ -1,0 +1,8 @@
+﻿mat	<path-to-matrix-file>
+outdir	<path-to-out-dir>
+rowmask	<path-to-row-mask-file>	[rows accounted in histogram need be masked as 1 and others as 0]
+colmask	<path-to-col-mask-file>	[cols accounted in histogram need be masked as 1 and others as 0]
+rows	95672	[Number of rows, this may be different from number of columns for rectangular cases]
+cols	95672	[Number of columns]
+xres	50	[x bins for histogram]
+title	<some-title-for-the-histogram>

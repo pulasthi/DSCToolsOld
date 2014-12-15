@@ -1,0 +1,11 @@
+﻿SequenceFile <string> Path to sequence fasta file
+DistFile	<string> Path to distance file which has N x N distances and row, col order is as same as the sequences. N is the total number of sequences
+Size	<int> The number of sequences
+ClusterString	<string> Comma separated list of of cluster numbers
+DataType	<int> 0=Int16, 1=UInt16, 2=double
+Method	<int> 0=MinMean, 1=MinMax
+PointsFile	<string> Path to points file. The points MUST have the cluster numbers associated with them
+OutputDir	<string> Path to output directory
+Verify	<bool> True if you need to verify with existing center results. False otherwise. If true, the following must be given
+cnum<tab>original-minmean-seqname<tab>mds-minmean-seqname
+...

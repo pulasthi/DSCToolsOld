@@ -1,0 +1,18 @@
+﻿pointsDir	C:\Users\sekanaya\Desktop\NewFungiCollateClustersL2\pts
+pointFilePattern fpts{0}.txt
+clustersDir	C:\Users\sekanaya\Desktop\NewFungiCollateClustersL2\clusters
+clusterDirpattern	r{0}({1})_{2}({3})
+clusterFilePattern	cluster-M{0}-C{1}.txt
+outDir	C:\Users\sekanaya\Desktop\NewFungiCollateClustersL2\plots
+outFilePattern	fungi_LSU_{0}({1})_to_{2}({3})_zeroidx.txt
+outPlotFilePattern	fungi_LSU_{0}({1})_to_{2}({3})_zeroidx.pviz
+outLablesFilePattern	fungi_LSU_{0}({1})_to_{2}({3})_zeroidx_labels.txt
+
+C	6	
+N	10
+join	3+4	
+labelsFile	"G:\My Box Files\SalsaBio\millions\446K_uniq\reclassification\regions\MultiDimensionalScaling\FullMDS\DASMACOF\r6\MPI\r6.22712.dasmacof.pid\Reclus\6(10)_{0+2+5}\fungi_LSU_6(10)_to_6(10)_zeroidx_labels.txt"
+x	y	n
+
+
+

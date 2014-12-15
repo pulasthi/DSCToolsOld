@@ -1,0 +1,39 @@
+﻿/fastaFile="C:\Users\sekanaya\Documents\Magic Briefcase\SALSA2\Millions\680K_Clus28(29)_100K(S)_1320(Si)_7625(Oi)\Sequences\Clus28(29)_8925_1300(Si)_7625(Oi).fa" /clusterFile="C:\Users\sekanaya\Documents\Magic Briefcase\SALSA2\Millions\680K_Clus28(29)_100K(S)_1320(Si)_7625(Oi)\ManxcatMDS\Si_varied_Oi_varied\MBF_dist_based\Analysis\12points_merged_clusters_4pointseach.txt"  /outDir="C:\Users\sekanaya\Documents\Magic Briefcase\SALSA2\Millions\680K_Clus28(29)_100K(S)_1320(Si)_7625(Oi)\ManxcatMDS\Si_varied_Oi_varied\MBF_dist_based\Analysis" /clusters=1
+
+/fastaFile="C:\Users\sekanaya\Documents\Magic Briefcase\SALSA2\Millions\680K_Clus28(29)_100K(S)_1320(Si)_7625(Oi)\Sequences\Clus28(29)_8925_1300(Si)_7625(Oi).fa" /clusterFile="C:\Users\sekanaya\Documents\Magic Briefcase\SALSA2\Millions\680K_Clus28(29)_100K(S)_1320(Si)_7625(Oi)\ManxcatMDS\Si_varied_Oi_varied\MBF_dist_based\Analysis\vertical\vertical_24points_3clus_8pointseach.txt"  /outDir="C:\Users\sekanaya\Documents\Magic Briefcase\SALSA2\Millions\680K_Clus28(29)_100K(S)_1320(Si)_7625(Oi)\ManxcatMDS\Si_varied_Oi_varied\MBF_dist_based\Analysis\vertical" /clusters=1,2,3
+
+Line
+/fastaFile="C:\Users\sekanaya\Documents\Magic Briefcase\SALSA2\Millions\680K_Clus28(29)_100K(S)_1320(Si)_7625(Oi)\Sequences\Clus28(29)_8925_1300(Si)_7625(Oi).fa" /clusterFile="C:\Users\sekanaya\Documents\Magic Briefcase\SALSA2\Millions\680K_Clus28(29)_100K(S)_1320(Si)_7625(Oi)\ManxcatMDS\Si_varied_Oi_varied\MBF_dist_based\Analysis\line\line_9points.txt" /outDir="C:\Users\sekanaya\Documents\Magic Briefcase\SALSA2\Millions\680K_Clus28(29)_100K(S)_1320(Si)_7625(Oi)\ManxcatMDS\Si_varied_Oi_varied\MBF_dist_based\Analysis\line" /clusters=1
+
+Line2
+/fastaFile="C:\Users\sekanaya\Documents\Magic Briefcase\SALSA2\Millions\680K_Clus28(29)_100K(S)_1320(Si)_7625(Oi)\Sequences\Clus28(29)_8925_1300(Si)_7625(Oi).fa" /clusterFile="C:\Users\sekanaya\Documents\Magic Briefcase\SALSA2\Millions\680K_Clus28(29)_100K(S)_1320(Si)_7625(Oi)\ManxcatMDS\Si_varied_Oi_varied\MBF_dist_based\Analysis\line2\line_3points.txt" /outDir="C:\Users\sekanaya\Documents\Magic Briefcase\SALSA2\Millions\680K_Clus28(29)_100K(S)_1320(Si)_7625(Oi)\ManxcatMDS\Si_varied_Oi_varied\MBF_dist_based\Analysis\line2" /clusters=1
+
+Line3 (20 points)
+/fastaFile="C:\Users\sekanaya\Documents\Magic Briefcase\SALSA2\Millions\680K_Clus28(29)_100K(S)_1320(Si)_7625(Oi)\Sequences\Clus28(29)_8925_1300(Si)_7625(Oi).fa" /clusterFile="C:\Users\sekanaya\Documents\Magic Briefcase\SALSA2\Millions\680K_Clus28(29)_100K(S)_1320(Si)_7625(Oi)\ManxcatMDS\Si_varied_Oi_varied\MBF_dist_based\Analysis\line3\line_20points.txt" /outDir="C:\Users\sekanaya\Documents\Magic Briefcase\SALSA2\Millions\680K_Clus28(29)_100K(S)_1320(Si)_7625(Oi)\ManxcatMDS\Si_varied_Oi_varied\MBF_dist_based\Analysis\line3" /clusters=1
+
+Line4 (20 points)
+/fastaFile="C:\Users\sekanaya\Documents\Magic Briefcase\SALSA2\Millions\680K_Clus28(29)_100K(S)_1320(Si)_7625(Oi)\Sequences\Clus28(29)_8925_1300(Si)_7625(Oi).fa" /clusterFile="C:\Users\sekanaya\Documents\Magic Briefcase\SALSA2\Millions\680K_Clus28(29)_100K(S)_1320(Si)_7625(Oi)\ManxcatMDS\Si_varied_Oi_varied\MBF_dist_based\Analysis\line4\line_20.txt" /outDir="C:\Users\sekanaya\Documents\Magic Briefcase\SALSA2\Millions\680K_Clus28(29)_100K(S)_1320(Si)_7625(Oi)\ManxcatMDS\Si_varied_Oi_varied\MBF_dist_based\Analysis\line4" /clusters=1
+
+Line5 (19 points)
+/fastaFile="C:\Users\sekanaya\Documents\Magic Briefcase\SALSA2\Millions\680K_Clus28(29)_100K(S)_1320(Si)_7625(Oi)\Sequences\Clus28(29)_8925_1300(Si)_7625(Oi).fa" /clusterFile="C:\Users\sekanaya\Documents\Magic Briefcase\SALSA2\Millions\680K_Clus28(29)_100K(S)_1320(Si)_7625(Oi)\ManxcatMDS\Si_varied_Oi_varied\MBF_dist_based\Analysis\line4\line_19.txt" /outDir="C:\Users\sekanaya\Documents\Magic Briefcase\SALSA2\Millions\680K_Clus28(29)_100K(S)_1320(Si)_7625(Oi)\ManxcatMDS\Si_varied_Oi_varied\MBF_dist_based\Analysis\line5" /clusters=1
+
+MacroLine1 (9 points)
+/fastaFile="C:\Users\sekanaya\Documents\SugarSync Shared Folders\Yang Ruan\SALSA\input\hmp16sRNA\unique\680k_100k\100k_sample_fasta.txt" /clusterFile="C:\Users\sekanaya\Documents\Magic Briefcase\SALSA2\Millions\680K_100K(S)_uniq\ManxcatMDS\BioJavaDistBased\sammon\Analysis\MacroLine1\MacroLine1_9PointNumbers.txt" /outDir="C:\Users\sekanaya\Documents\Magic Briefcase\SALSA2\Millions\680K_100K(S)_uniq\ManxcatMDS\BioJavaDistBased\sammon\Analysis\MacroLine1" /clusters=1
+
+OrangeCluster(3)_LongThinMapped
+/fastaFile="C:\Users\sekanaya\Documents\SugarSync Shared Folders\Yang Ruan\SALSA\input\hmp16sRNA\unique\680k_100k\100k_sample_fasta.txt" /clusterFile="C:\Users\sekanaya\Documents\Magic Briefcase\SALSA2\Millions\680K_100K(S)_uniq\ManxcatMDS\BioJavaDistBased\4D(8D)\OrangeCluster(3).txt" /outDir="C:\Users\sekanaya\Documents\Magic Briefcase\SALSA2\Millions\680K_100K(S)_uniq\ManxcatMDS\BioJavaDistBased\4D(8D)" /clusters=3
+
+Test-for-the-issue-in-fasta-extractor
+/fastaFile="C:\Users\sekanaya\Documents\Magic Briefcase\SALSA2\Millions\680K_Clus28(29)_100K(S)_1320(Si)_7625(Oi)\Sequences\Clus28(29)_8925_1300(Si)_7625(Oi).fa" /clusterFile="C:\Users\sekanaya\Documents\Magic Briefcase\SALSA2\Millions\680K_Clus28(29)_100K(S)_1320(Si)_7625(Oi)\ManxcatMDS\Si_varied_Oi_varied\MBF_dist_based\Analysis\test\testpoints.txt" /outDir="C:\Users\sekanaya\Documents\Magic Briefcase\SALSA2\Millions\680K_Clus28(29)_100K(S)_1320(Si)_7625(Oi)\ManxcatMDS\Si_varied_Oi_varied\MBF_dist_based\Analysis\test" /clusters=1
+
+Cluster 21+5 from 100K of the original ~680K resulted from ~1M Mina's data
+/fastaFile="C:\Users\sekanaya\Documents\Magic Briefcase\SALSA2\Millions\680K_100K(S)_uniq\Sequences\100k_sample_fasta.txt" /clusterFile="C:\Users\sekanaya\Documents\Magic Briefcase\SALSA2\Millions\680K_100K(S)_uniq\pwc\BioJava_dist_based\nw\pwc-cluster-M43-C29.txt" /outDir="C:\Users\sekanaya\Documents\Magic Briefcase\SALSA2\Millions\680K_100K(S)_uniq\Sequences" /clusters=5,21
+
+TwoClusters from 21+5 swgms
+/fastaFile="C:\Users\sekanaya\Documents\Magic Briefcase\SALSA2\Millions\680K_100K(S)_uniq\Sequences\100k_sample_fasta_clusters_21+5.fa" /clusterFile="C:\Users\sekanaya\Documents\Magic Briefcase\SALSA2\Millions\680K_100K(S)_Clus21+5_6822\smallertwoclusters\twoclusterpoints.txt" /outDir="C:\Users\sekanaya\Documents\Magic Briefcase\SALSA2\Millions\680K_100K(S)_Clus21+5_6822\smallertwoclusters" /clusters=1
+
+BigCluster from 21+5 swgms
+/fastaFile="C:\Users\sekanaya\Documents\Magic Briefcase\SALSA2\Millions\680K_100K(S)_uniq\Sequences\100k_sample_fasta_clusters_21+5.fa" /clusterFile="C:\Users\sekanaya\Documents\Magic Briefcase\SALSA2\Millions\680K_100K(S)_Clus21+5_6822\smallertwoclusters\go24ge20_bigcluster_points.txt" /outDir="C:\Users\sekanaya\Documents\Magic Briefcase\SALSA2\Millions\680K_100K(S)_Clus21+5_6822\smallertwoclusters" /clusters=1
+
+SmallCluster from 21+5 swgms
+/fastaFile="C:\Users\sekanaya\Documents\Magic Briefcase\SALSA2\Millions\680K_100K(S)_uniq\Sequences\100k_sample_fasta_clusters_21+5.fa" /clusterFile="C:\Users\sekanaya\Documents\Magic Briefcase\SALSA2\Millions\680K_100K(S)_Clus21+5_6822\smallertwoclusters\go24ge20_smallcluster_points.txt" /outDir="C:\Users\sekanaya\Documents\Magic Briefcase\SALSA2\Millions\680K_100K(S)_Clus21+5_6822\smallertwoclusters" /clusters=1

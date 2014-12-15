@@ -1,0 +1,79 @@
+﻿pointsDir	C:\Users\sekanaya\Desktop\collateclustershaixumillionsagain\pts
+pointFilePattern mpts{0}.txt
+clustersDir	C:\Users\sekanaya\Desktop\collateclustershaixumillionsagain\clusters
+clusterDirpattern	{0}({1})_{2}({3})
+clusterFilePattern	cluster-M{0}-C{1}.txt
+outDir	C:\Users\sekanaya\Desktop\collateclustershaixumillionsagain\plots
+outFilePattern	haixu_{0}({1})_to_{2}({3})_zeroidx.txt
+outPlotFilePattern	haixu_{0}({1})_to_{2}({3})_zeroidx.pviz
+outLablesFilePattern	haixu_{0}({1})_to_{2}({3})_zeroidx_labels.txt
+
+C	0	
+N	9
+join	none
+labelsFile	none
+x	y	n
+6	4	2
+
+C	0	
+N	9
+join	none
+labelsFile	none
+x	y	n
+6	4	3
+
+C	0	
+N	9
+join	none
+labelsFile	none
+x	y	n
+6	4	4
+
+C	1	
+N	15
+join	none
+labelsFile	none
+x	y	n
+10	4	3
+
+C	1	
+N	15
+join	none
+labelsFile	none
+x	y	n
+10	4	4
+
+C	4	
+N	26
+join	none
+labelsFile	none
+x	y	n
+13	4	3
+
+C	4	
+N	26
+join	none
+labelsFile	none
+x	y	n
+13	4	4
+
+C	6	
+N	11
+join	none
+labelsFile	none
+x	y	n
+0	5	3
+
+C	6	
+N	11
+join	none
+labelsFile	none
+x	y	n
+0	5	4
+
+C	6	
+N	11
+join	none
+labelsFile	none
+x	y	n
+0	5	5

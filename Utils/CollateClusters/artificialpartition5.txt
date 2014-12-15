@@ -1,0 +1,16 @@
+﻿pointsDir	C:\Users\sekanaya\Desktop\collateclusters-artificial\pts
+pointFilePattern mpts{0}.txt
+clustersDir	C:\Users\sekanaya\Desktop\collateclusters-artificial\clusters
+clusterDirpattern	{0}({1})_{2}({3})
+clusterFilePattern	cluster-M{0}-C{1}.txt
+outDir	C:\Users\sekanaya\Desktop\collateclusters-artificial\plots
+outFilePattern	artificial_{0}({1})_to_{2}({3})_zeroidx.txt
+outPlotFilePattern	artificial_{0}({1})_to_{2}({3})_zeroidx.pviz
+outLablesFilePattern	artificial_{0}({1})_to_{2}({3})_zeroidx_labels.txt
+
+C	0	
+N	29
+join	none
+labelsFile	G:\SugarSyncSharedByMe\SalsaBio\haixu\qiime_mother_pwc\mock_data\manxcat\artificial\F.D_to_0(29)\artificial_0(31)_to_0(29)_zeroidx_labels.txt
+x	y	n
+2	2	2

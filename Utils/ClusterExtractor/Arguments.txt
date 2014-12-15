@@ -1,0 +1,18 @@
+﻿1. For sample extraction from Mina's 100K+43 distance file
+------------------------------------------------------------
+	a.) 100 Points [43,142]
+/clusterFile=C:\sali\pti\sub\salsa\Saliya\c#\Utils\ClusterExtractor\Samples\Mina100K+43\SampleCluster_100Points_[43,142].txt /distFile=C:\sali\pti\runs\tempest\backup_15-02-11\cn01\edrive\salsa\saliya\mina-Nov11-2010\gb-2007-8-7-r143-s2.fa.3.100k+gb-2007-8-7-r143-s1\Output\distance.bin /outDir=C:\sali\pti\data\mina-Nov11-2010\distances /bigc=100043 /dataType=0 /clusters=1 /consensus=0
+
+	b.) 1000 Points [43,1042]
+/clusterFile=C:\sali\pti\sub\salsa\Saliya\c#\Utils\ClusterExtractor\Samples\Mina100K+43\SampleCluster_1000Points_[43,1042].txt /distFile=C:\sali\pti\runs\tempest\backup_15-02-11\cn01\edrive\salsa\saliya\mina-Nov11-2010\gb-2007-8-7-r143-s2.fa.3.100k+gb-2007-8-7-r143-s1\Output\distance.bin /outDir=C:\sali\pti\data\mina-Nov11-2010\distances /bigc=100043 /dataType=0 /clusters=1 /consensus=0
+
+
+2. For catapilar analysis with 8925 points
+-------------------------------------------
+	c.) 12 Points from "catarpillar" analysis
+/clusterFile=C:\Users\sekanaya\Documents\Magic Briefcase\SALSA2\Millions\680K_Clus28(29)_100K(S)_1320(Si)_7625(Oi)\ManxcatMDS\Si_varied_Oi_varied\MBF_dist_based\Analysis\12points_3clus_4pointseach.txt /distFile=C:\sali\pti\runs\tempest\millions\680K_100K(S)_Clus28(29)_1320(Si)_7625(Oi)\Output\distance.bin /outDir=C:\Users\sekanaya\Documents\Magic Briefcase\SALSA2\Millions\680K_Clus28(29)_100K(S)_1320(Si)_7625(Oi)\ManxcatMDS\Si_varied_Oi_varied\MBF_dist_based\Analysis /bigc=8925 /dataType=0 /clusters=1,2,3 /consensus=0
+
+
+3. For Clus21+5 from 100K of ~680K - in tempest-cn01 \\tempest-cn01\E$\Salsa\saliya\millions\ryan-680Korig-100Kuniq\Input
+--------------------------------------------------------------------------------------------------------------------------------
+/clusterFile=Clus21+5_combined(no order).txt /distFile=distance_100k.bin /outDir=. /bigc=100000 /dataType=0 /clusters=1 /consensus=0

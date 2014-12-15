@@ -1,0 +1,16 @@
+﻿pointsDir	C:\Users\sekanaya\Desktop\collateclustershaixumillionsagain\pts
+pointFilePattern mpts{0}.txt
+clustersDir	C:\Users\sekanaya\Desktop\collateclustershaixumillionsagain\clusters
+clusterDirpattern	{0}({1})_{2}({3})
+clusterFilePattern	cluster-M{0}-C{1}.txt
+outDir	C:\Users\sekanaya\Desktop\collateclustershaixumillionsagain\plots
+outFilePattern	haixu_{0}({1})_to_{2}({3})_zeroidx.txt
+outPlotFilePattern	haixu_{0}({1})_to_{2}({3})_zeroidx.pviz
+outLablesFilePattern	haixu_{0}({1})_to_{2}({3})_zeroidx_labels.txt
+
+C	0	
+N	15
+join	8+11
+labelsFile	G:\SugarSyncSharedByMe\SalsaBio\millions\446K_uniq\regions\haixu_release\plots\mega_regions\0\refined\refined\refined\haixu_0(14)_to_0(15)[8+11](14)_zeroidx_labels.txt
+x	y	n
+8	2	2

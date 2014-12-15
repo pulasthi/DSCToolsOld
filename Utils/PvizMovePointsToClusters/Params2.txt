@@ -1,0 +1,30 @@
+﻿0
+Ent_inf	AZ	IN	CA
+Cla_cla	AZ	IN
+Cla_lut
+Cla_can
+Cla_etu
+
+4
+Rac_ful
+Aca_lae
+Ent_inf
+Arc_sch
+
+12
+Rhi_irr
+Cla_cla
+
+13
+Fun_mos
+Pac_sci
+
+14
+Scu_ery
+Scu_het
+Gig_gig
+
+15
+Rhi_cla
+Rhi_int
+Cla_can

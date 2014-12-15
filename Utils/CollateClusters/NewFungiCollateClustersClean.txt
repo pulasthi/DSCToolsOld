@@ -1,0 +1,105 @@
+﻿pointsDir	C:\Users\sekanaya\Desktop\NewFungiCollateClustersClean\pts
+pointFilePattern fpts{0}.txt
+clustersDir	C:\Users\sekanaya\Desktop\NewFungiCollateClustersClean\clusters
+clusterDirpattern	r{0}({1})_{2}({3})
+clusterFilePattern	cluster-M{0}-C{1}.txt
+outDir	C:\Users\sekanaya\Desktop\NewFungiCollateClustersClean\plots
+outFilePattern	fungi_LSU_{0}({1})_to_{2}({3})_zeroidx.txt
+outPlotFilePattern	fungi_LSU_{0}({1})_to_{2}({3})_zeroidx.pviz
+outLablesFilePattern	fungi_LSU_{0}({1})_to_{2}({3})_zeroidx_labels.txt
+
+C	6	
+N	9
+join	0+2+3
+labelsFile	"G:\My Box Files\SalsaBio\millions\446K_uniq\reclassification\regions\MultiDimensionalScaling\FullMDS\DASMACOF\r6\MPI\r6.22712.dasmacof.pid\r6.damacof.pid.(9)_labels.txt"
+x	y	n
+7	2	2
+
+C	2	
+N	10
+join	none
+labelsFile	"G:\My Box Files\SalsaBio\millions\446K_uniq\reclassification\regions\MultiDimensionalScaling\FullMDS\DASMACOF\r2\r2.124209.dasmacof.pid\r2.124209.dasmacof.pid.(10)_labels.txt"
+x	y	n
+8	4	4
+0	3	2
+9	4	4
+4	3	3
+6	3	3
+
+C	3	
+N	15
+join	none
+labelsFile	"G:\My Box Files\SalsaBio\millions\446K_uniq\reclassification\regions\MultiDimensionalScaling\FullMDS\DASMACOF\r3\r3.39212.dasmacof.pid.(15)_labels.txt"
+x	y	n
+0	2	2
+2	3	3
+3	3	3
+4	4	4
+5	3	2
+10	2	2
+14	2	2
+
+C	3	
+N	15
+join	none
+labelsFile	"G:\My Box Files\SalsaBio\millions\446K_uniq\reclassification\regions\MultiDimensionalScaling\FullMDS\DASMACOF\r3\r3.39212.dasmacof.pid.(15)_labels.txt"
+x	y	n
+0	2	2
+2	3	3
+3	3	3
+4	4	4
+5	3	3
+10	2	2
+14	2	2
+
+C	4	
+N	12
+join	none
+labelsFile	"G:\My Box Files\SalsaBio\millions\446K_uniq\reclassification\regions\MultiDimensionalScaling\FullMDS\DASMACOF\r4\Reclus\4(10)_{4+9}(2)\fungi_LSU_4(10)_to_4(12)_zeroidx_labels.txt"
+x	y	n
+0	3	3
+2	2	2
+4	2	2
+
+C	4	
+N	12
+join	none
+labelsFile	"G:\My Box Files\SalsaBio\millions\446K_uniq\reclassification\regions\MultiDimensionalScaling\FullMDS\DASMACOF\r4\Reclus\4(10)_{4+9}(2)\fungi_LSU_4(10)_to_4(12)_zeroidx_labels.txt"
+x	y	n
+0	3	3
+2	2	2
+4	2	2
+7	2	2
+8	2	2
+
+C	5	
+N	26
+join	none
+labelsFile	"G:\My Box Files\SalsaBio\millions\446K_uniq\reclassification\regions\MultiDimensionalScaling\FullMDS\DASMACOF\r5\Reclus\fungi_LSU_5(10)_to_5(26)_zeroidx_labels.txt"
+x	y	n
+8	2	2
+9	3	2
+
+C	5	
+N	26
+join	none
+labelsFile	"G:\My Box Files\SalsaBio\millions\446K_uniq\reclassification\regions\MultiDimensionalScaling\FullMDS\DASMACOF\r5\Reclus\fungi_LSU_5(10)_to_5(26)_zeroidx_labels.txt"
+x	y	n
+8	2	2
+15	3	3
+9	3	2	
+
+C	7	
+N	9
+join	4+5	3+6
+labelsFile	"G:\My Box Files\SalsaBio\millions\446K_uniq\reclassification\regions\MultiDimensionalScaling\FullMDS\DASMACOF\r7\Reclus\fungi_LSU_7(8)_to_7(9)_zeroidx_labels.txt"
+x	y	n
+3	2	2
+
+C	1	
+N	2
+join	0+2+3
+labelsFile	"G:\My Box Files\SalsaBio\millions\446K_uniq\reclassification\regions\MultiDimensionalScaling\FullMDS\DASMACOF\r1\r1.47039.dasmacof.pid\r1.47039.dasmacof.pid.(4)_labels.txt"
+x	y	n
+
+

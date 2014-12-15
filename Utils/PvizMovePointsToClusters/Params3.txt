@@ -1,0 +1,21 @@
+﻿11
+Rhi_int
+Rhi_cla
+Rhi_irr
+Glo_mac
+
+10
+Rhi_irr
+Cla_cla	IN
+
+3
+Rhi_irr
+Cla_cla	IN
+
+2
+Amb_app	NC
+Amb_app	JA
+Amb_fen
+
+9
+Rhi_cla

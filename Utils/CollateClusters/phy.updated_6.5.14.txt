@@ -1,0 +1,16 @@
+﻿pointsDir	C:\Users\sekanaya\Desktop\phy.updated_6.5.14\points
+pointFilePattern pts{0}.txt
+clustersDir	C:\Users\sekanaya\Desktop\phy.updated_6.5.14\clusters
+clusterDirpattern	r{0}({1})_{2}({3})
+clusterFilePattern	cluster-M{0}-C{1}.txt
+outDir	C:\Users\sekanaya\Desktop\phy.updated_6.5.14\plots
+outFilePattern	56712_wdasmacof_{0}({1})_to_{2}({3})_zeroidx.txt
+outPlotFilePattern	56712_wdasmacof_{0}({1})_to_{2}({3})_zeroidx.pviz
+outLablesFilePattern	56712_wdasmacof_{0}({1})_to_{2}({3})_zeroidx_labels.txt
+
+C	0	
+N	12
+join	none
+labelsFile	none
+x	y	n
+5	5	5

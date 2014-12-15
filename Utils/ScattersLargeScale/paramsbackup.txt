@@ -1,0 +1,11 @@
+﻿matA	<path-to-matrix-A>
+matB	<path-to-matrix-B>
+size	<size>
+outdir	<path-to-out-directory>
+xmaxbound	1.5
+ymaxbound	1.5
+xres	50
+yres	50
+alpha	2
+pcutf	0.85
+zto1	True

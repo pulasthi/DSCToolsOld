@@ -1,0 +1,97 @@
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
+using Common;
+
+namespace MaxDistceOfCenters
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string outDir =
+                @"G:\SugarSyncSharedByMe\SalsaBio\millions\420+74+1291\420+74+1291_sammon_unwgt_all_varied_new";
+            string clusterFile =
+                @"G:\SugarSyncSharedByMe\SalsaBio\millions\420+74+1291\clusters_with_420_classified.txt";
+            string pointsFile =
+                @"G:\SugarSyncSharedByMe\SalsaBio\millions\420+74+1291\420+74+1291_sammon_unwgt_all_varied_new\SIMPLEpoints.txt";
+            int clusterCount = 140; // i.e. 140 x 3 = 420 points from top.
+            int centersPerCluster = 3; // 3 points per each cluster in the mega regions.
+
+            int numOfClassifications = 3; // i.e. 0 for good, 1 for part of complicated, 2 for debris.
+
+            Hashtable [] hist = new Hashtable[numOfClassifications];
+            for (int i = 0; i < numOfClassifications; i++)
+            {
+                hist[i] = new Hashtable();
+            }
+
+            using (StreamReader creader = new StreamReader(clusterFile))
+            {
+                using (SimplePointsReader preader = new SimplePointsReader(pointsFile))
+                {
+                    for (int i = 0; i < clusterCount; i++)
+                    {
+                        Point [] points = new Point[centersPerCluster];
+                        string line = string.Empty;
+                        for (int j = 0; j < centersPerCluster; j++)
+                        {
+                            points[j] = preader.ReadPoint();
+                            line = creader.ReadLine();
+                        }
+
+                        int classifiedCluster = int.Parse(line.Split('\t')[1]);
+                        double max = MaxDist(points);
+                        Hashtable ht = hist[classifiedCluster];
+                        if (ht.Contains(max))
+                        {
+                            ht[max] = ((int) ht[max]) + 1;
+                        }
+                        else
+                        {
+                            ht[max] = 1;
+                        }
+                    }
+                }
+            }
+
+            for (int i = 0; i < numOfClassifications; i++)
+            {
+                using (StreamWriter writer = new StreamWriter(Path.Combine(outDir, "center_hist_" + i + ".txt")))
+                {
+                    Hashtable ht = hist[i];
+                    foreach (DictionaryEntry kv in ht)
+                    {
+                        writer.WriteLine(kv.Key+"\t"+kv.Value);
+                    }
+                }
+                
+            }
+        }
+
+        static double MaxDist(Point[] points)
+        {
+            double max = 0.0;
+            for (int i = 0; i < points.Length; i++)
+            {
+                for (int j = i+1; j < points.Length; j++)
+                {
+                    double d = Dist(points[i], points[j]);
+                    if (d > max)
+                    {
+                        max = d;
+                    }
+                }
+            }
+            return max;
+        }
+
+        private static double Dist(Point p1, Point p2)
+        {
+            return Math.Sqrt(Math.Pow(p1.X - p2.X, 2) + Math.Pow(p1.Y - p2.Y, 2) + Math.Pow(p1.Z - p2.Z, 2));
+        }
+    }
+}

@@ -1,0 +1,10 @@
+﻿DistanceFile	
+AlignmentLengthBinaryFile
+SequenceFile
+Size
+OutDirectory
+
+DistanceMax
+MaxInclusive
+DistanceMin
+MinInclusive

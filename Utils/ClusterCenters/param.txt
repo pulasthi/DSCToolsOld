@@ -1,0 +1,7 @@
+﻿SequenceFile G:\SugarSyncSharedByMe\SalsaBio\millions\446K_uniq\regions\haixu_release\sequences\mega_regions\6\haixu_region_6.fa
+DistFile	C:\Users\sekanaya\Desktop\junkmatrix\centers\haixu_15452_r6_c#_swgms.bin
+Size	15452
+ClusterString	0,1,2,3,4,5,6,7,8,9,10
+DataType	0
+PointsFile	G:\SugarSyncSharedByMe\SalsaBio\millions\446K_uniq\regions\haixu_release\plots\mega_regions\6\haixu_region_6(11)_zeroidx.txt
+OutputDir	C:\Users\sekanaya\Desktop\junkmatrix\centers\haixu_region_6_testagain

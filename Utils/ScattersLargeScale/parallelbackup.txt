@@ -1,0 +1,378 @@
+﻿using System;
+using System.Collections;
+using System.IO;
+using Common;
+using MPI;
+using Salsa.Core;
+using Salsa.Core.Blas;
+
+#if USE_UINT16
+using TDistance = System.UInt16;
+#elif USE_INT16
+using TDistance = System.Int16;
+#else
+using TDistance = System.Double;
+#endif
+
+namespace ScattersLargeScale
+{
+    class Program
+    {
+        private static string _matA;
+        private static string _matB;
+        private static int _size;
+        private static string _outdir;
+
+        static double xmaxbound = 1.0;
+        static double ymaxbound = 1.0;
+        static int xres = 50;
+        static int yres = 50;
+        static double alpha = 2.0;
+        static double pcutf = 0.85;
+        static bool zto1 = true;
+
+        static double xmax = double.NegativeInfinity;
+        static double xmin = double.PositiveInfinity;
+
+        static double ymax = double.NegativeInfinity;
+        static double ymin = double.PositiveInfinity;
+
+        private static double deltax, deltay; 
+
+        // Surface area of each small 2D square
+        private static double deltas;
+
+
+        static void Main(string[] args)
+        {
+            // Load the command line args into our helper class which allows us to name arguments
+            Arguments pargs = new Arguments(args);
+            pargs.Usage = "Usage: ScatterLargeScale.exe /config=<string>";
+
+            if (pargs.CheckRequired(new string[] { "config" }) == false)
+            {
+                Console.WriteLine(pargs.Usage);
+                return;
+            }
+
+            using (MPI.Environment env = new MPI.Environment(ref args))
+            {
+                ReadConfiguration(pargs);
+
+                int rank = MPI.Communicator.world.Rank;
+                int worldSize = MPI.Communicator.world.Size;
+                Block[][] processBlocks = BlockPartitioner.Partition(_size, _size, worldSize, worldSize);
+                Block[] myBlocks = processBlocks[rank];
+                PartialMatrix<TDistance> partialA = new PartialMatrix<TDistance>(myBlocks[0].RowRange, new Range(0, _size -1));
+                PartialMatrix<TDistance> partialB = new PartialMatrix<TDistance>(myBlocks[0].RowRange, new Range(0, _size -1));
+
+                ReadDistanceBlocks(rank, partialA, partialB, myBlocks);
+
+                // Wait till everyone is done reading their blocks and have local min and max values
+                MPI.Communicator.world.Barrier();
+                xmin = MPI.Communicator.world.Allreduce<double>(xmin, Operation<double>.Min);
+                xmax = MPI.Communicator.world.Allreduce<double>(xmax, Operation<double>.Max);
+                ymin = MPI.Communicator.world.Allreduce<double>(ymin, Operation<double>.Min);
+                ymax = MPI.Communicator.world.Allreduce<double>(ymax, Operation<double>.Max);
+
+                // global xmax, xmin, ymax, and ymin should be set by now
+                deltax = (xmax - xmin) / xres;
+                deltay = (ymax - ymin) / yres;
+                deltas = deltax * deltay;
+
+                Hashtable cells = new Hashtable();
+                GeneratePartialHistograms(cells, rank, partialA, partialB, myBlocks);
+
+                // Wait till everyone is done their part of histogramming
+                MPI.Communicator.world.Barrier();
+
+                Hashtable [] cellsarray = new Hashtable[worldSize];
+                MPI.Communicator.world.Gather(cells, 0, ref cellsarray);
+
+                if (rank == 0)
+                {
+                    // Rank 0 should have all the cells from each process by now.
+                    long cellmax = 0, count = 0;
+                    Hashtable finalcells = new Hashtable();
+                    foreach (Hashtable t in cellsarray)
+                    {
+                        foreach (DictionaryEntry kv in t)
+                        {
+                            string cell = (string) kv.Key;
+                            long v = (long) kv.Value;
+                            finalcells[cell] = finalcells.ContainsKey(cell) ? ((long) finalcells[cell]) + v : v;
+                            if ((long) finalcells[cell] > cellmax)
+                            {
+                                cellmax = (long) finalcells[cell];
+                            }
+                            count += v;
+                        }
+                    }
+
+                    double cellmean = ((double) count)/(xres*yres);
+                    double power = cellmax < (alpha*cellmean) ? 1.0 : (Math.Log(alpha)/Math.Log(cellmax/cellmean));
+                    // Constant value by which the number of points in a 2D square is multiplied.
+                    // The resulting value is independent of the total number of points as well as 
+                    // the x,y resolution. The mult value is a factor changing the z value scale.
+                    double c = zto1 ? (1.0/cellmax) : (1.0/(count*deltas));
+
+                    int xpointcount = 2*xres;
+                    int ypointcount = 2*yres;
+
+                    string outFile = Path.Combine(_outdir,
+                                                  Path.GetFileNameWithoutExtension(_matB) + "-Vs-" +
+                                                  Path.GetFileNameWithoutExtension(_matA) + ".txt");
+                    using (StreamWriter writer = new StreamWriter(outFile))
+                    {
+                        writer.WriteLine("#xcoord\tycoord\thistogramValue");
+                        double cellvalue;
+                        for (int i = 0; i < xpointcount; i++)
+                        {
+                            double x = xmin + ((IsOdd(i) ? (i + 1)/2 : i/2)*deltax);
+                            int cellx = IsOdd(i) ? (i - 1)/2 : i/2;
+
+                            for (int j = 0; j < ypointcount; j++)
+                            {
+                                double y = ymin + ((IsOdd(j) ? (j + 1)/2 : j/2)*deltay);
+                                int celly = IsOdd(j) ? (j - 1)/2 : j/2;
+                                string cell = cellx + "," + celly;
+
+                                cellvalue = Math.Pow(((finalcells.ContainsKey(cell) ? (long) finalcells[cell] : 0L)*c), power);
+
+                                // todo: commented for now
+                                // cellvalue = cellvalue > pcutf ? pcutf : cellvalue < ncutf ? ncutf : cellvalue;
+                                cellvalue = cellvalue > pcutf ? pcutf : cellvalue;
+
+                                writer.WriteLine(x + "\t" + y + "\t" + cellvalue);
+                            }
+                            writer.WriteLine();
+                        }
+
+                        // Fill up the remaining region from beyond x=xmax and y=ymax as zero 
+                        writer.WriteLine();
+                        writer.WriteLine(xmin + "\t" + ymax + "\t" + 0.0);
+                        writer.WriteLine(xmin + "\t" + ymaxbound + "\t" + 0.0);
+                        writer.WriteLine();
+                        writer.WriteLine(xmax + "\t" + ymax + "\t" + 0.0);
+                        writer.WriteLine(xmax + "\t" + ymaxbound + "\t" + 0.0);
+                        writer.WriteLine();
+                        writer.WriteLine(xmax + "\t" + ymin + "\t" + 0.0);
+                        writer.WriteLine(xmax + "\t" + ymaxbound + "\t" + 0.0);
+                        writer.WriteLine();
+                        writer.WriteLine(xmaxbound + "\t" + ymin + "\t" + 0.0);
+                        writer.WriteLine(xmaxbound + "\t" + ymaxbound + "\t" + 0.0);
+                    }
+                }
+            }
+        }
+
+        private static void GeneratePartialHistograms(Hashtable cells, int rank, PartialMatrix<short> partialA, PartialMatrix<short> partialB, Block[] myBlocks)
+        {
+            for (int i = 0; i < myBlocks.Length; ++i)
+            {
+                Block block = myBlocks[i];
+                if ((rank == i) || (rank > i && !IsOdd(rank + i)) || (rank < i && IsOdd(rank + i)))
+                {
+                    // Interesting block for this process
+                    if (rank == i)
+                    {
+                        // Diagonal block
+                        for (int r = block.RowRange.StartIndex; r <= block.RowRange.EndIndex; ++r)
+                        {
+                            for (int c = block.ColumnRange.StartIndex; c < r; ++c)
+                            {
+                                // Each pair in block
+                                double xval = ((double)partialA[r, c]) / TDistance.MaxValue;
+                                double yval = ((double)partialB[r, c]) / TDistance.MaxValue;
+                                UpdateCells(xval, yval, cells);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        // Non diagonal block
+                        for (int r = block.RowRange.StartIndex; r <= block.RowRange.EndIndex; ++r)
+                        {
+                            for (int c = block.ColumnRange.StartIndex; c <= block.ColumnRange.EndIndex; ++c)
+                            {
+                                // Each pair in block
+                                double xval = ((double)partialA[r, c]) / TDistance.MaxValue;
+                                double yval = ((double)partialB[r, c]) / TDistance.MaxValue;
+                                UpdateCells(xval, yval, cells);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        private static void ReadDistanceBlocks(int rank, PartialMatrix<TDistance> partialA, PartialMatrix<TDistance> partialB, Block[] myBlocks)
+        {
+#if USE_UINT16
+            using (MatrixReader matAReader = new MatrixReader(_matA, MatrixType.UInt16, _size),
+                matBReader = new MatrixReader(_matB, MatrixType.UInt16, _size))
+#elif USE_INT16
+            using (MatrixReader matAReader = new MatrixReader(_matA, MatrixType.Int16, _size),
+                matBReader = new MatrixReader(_matB, MatrixType.Int16, _size))
+#else
+            using (MatrixReader matAReader = new MatrixReader(_matA, MatrixType.Double, _size),
+                matBReader = new MatrixReader(_matB, MatrixType.Double, _size))
+#endif
+            {
+                for (int i = 0; i < myBlocks.Length; ++i)
+                {
+                    Block block = myBlocks[i];
+                    if ((rank == i) || (rank > i && !IsOdd(rank + i)) || (rank < i && IsOdd(rank + i)))
+                    {
+                        // Interesting block for this process
+                        if (rank == i)
+                        {
+                            // Diagonal block
+                            for(int r = block.RowRange.StartIndex; r <= block.RowRange.EndIndex; ++r)
+                            {
+                                for (int c = block.ColumnRange.StartIndex; c < r; ++c)
+                                {
+                                    // Each pair in block
+                                    TDistance x, y;
+                                    ReadXy(out x,out y, matAReader.Read(r,c), matBReader.Read(r,c));
+                                    partialA[r, c] = x;
+                                    partialB[r, c] = y;
+
+                                    double xval = ((double) x)/TDistance.MaxValue;
+                                    double yval = ((double) y)/TDistance.MaxValue;
+
+                                    if (xval > xmax)
+                                    {
+                                        xmax = xval;
+                                    }
+
+                                    if (xval < xmin)
+                                    {
+                                        xmin = xval;
+                                    }
+
+                                    if (yval > ymax)
+                                    {
+                                        ymax = yval;
+                                    }
+
+                                    if (yval < ymin)
+                                    {
+                                        ymin = yval;
+                                    }
+                                }
+                            }
+                        }
+                        else
+                        {
+                            // Non diagonal block
+                            for (int r = block.RowRange.StartIndex; r <= block.RowRange.EndIndex; ++r)
+                            {
+                                for (int c = block.ColumnRange.StartIndex; c <= block.ColumnRange.EndIndex; ++c)
+                                {
+                                    // Each pair in block
+                                    TDistance x, y;
+                                    ReadXy(out x, out y, matAReader.Read(r, c), matBReader.Read(r, c));
+                                    partialA[r, c] = x;
+                                    partialB[r, c] = y;
+
+                                    double xval = ((double)x) / TDistance.MaxValue;
+                                    double yval = ((double)y) / TDistance.MaxValue;
+
+                                    if (xval > xmax)
+                                    {
+                                        xmax = xval;
+                                    }
+
+                                    if (xval < xmin)
+                                    {
+                                        xmin = xval;
+                                    }
+
+                                    if (yval > ymax)
+                                    {
+                                        ymax = yval;
+                                    }
+
+                                    if (yval < ymin)
+                                    {
+                                        ymin = yval;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        private static void UpdateCells(double x, double y, Hashtable cells)
+        {
+            // cell number based on zero index from bottom left corner
+            // if x is equal to xmax then it's placed in the last cell, which is xres-1 in zero based index
+            // same is done for y when y == ymax
+            int cellx = x == xmax ? xres - 1 : (int)Math.Floor((x - xmin) / deltax);
+            int celly = y == ymax ? yres - 1 : (int)Math.Floor((y - ymin) / deltay);
+
+            if (x > xmax || y > ymax || x < xmin || y < ymin)
+            {
+                // now this should never be reached
+                throw new Exception("bad(1)-> x: " + x + " y: " + y + " xmax: " + xmax + " xmin: " + xmin + " ymax: " +
+                                    ymax + " ymin: " + ymin);
+            }
+
+            if (cellx >= xres || celly >= yres)
+            {
+                // now this should never be reached
+                throw new Exception("bad(2)-> x: " + x + " y:" + y + " xmax: " + xmax + " xmin: " + xmin + " ymax: " +
+                                    ymax + " ymin: " + ymin + " cellx: " + cellx + " celly: " + celly);
+            }
+
+            string cell = cellx + "," + celly;
+            cells[cell] = cells.ContainsKey(cell) ? ((long)cells[cell]) + 1 : 1L;
+        }
+
+        private static void ReadXy(out TDistance x, out TDistance y, byte[] xarr, byte [] yarr)
+        {
+#if USE_UINT16
+            x = BitConverter.ToUInt16(xarr, 0);
+            y = BitConverter.ToUInt16(yarr, 0);
+#elif USE_INT16
+            x = BitConverter.ToInt16(xarr, 0);
+            y = BitConverter.ToInt16(yarr, 0);
+#else
+            x = BitConverter.ToDouble(xarr, 0);
+            y = BitConverter.ToDouble(yarr, 0);
+#endif
+        }
+
+        private static void ReadConfiguration(Arguments pargs)
+        {
+            string config = pargs.GetValue<string>("config");
+            using (StreamReader reader = new StreamReader(config))
+            {
+                char[] sep = new[] { ' ', '\t' };
+                /* Reading parameters file */
+                _matA = reader.ReadLine().Trim().Split(sep)[1];
+                _matB = reader.ReadLine().Trim().Split(sep)[1];
+                _size = int.Parse(reader.ReadLine().Trim().Split(sep)[1]);
+                _outdir = reader.ReadLine().Trim().Split(sep)[1];
+
+                xmaxbound = double.Parse(reader.ReadLine().Trim().Split(sep)[1]);
+                ymaxbound = double.Parse(reader.ReadLine().Trim().Split(sep)[1]);
+                xres = int.Parse(reader.ReadLine().Trim().Split(sep)[1]);
+                yres = int.Parse(reader.ReadLine().Trim().Split(sep)[1]);
+                alpha = double.Parse(reader.ReadLine().Trim().Split(sep)[1]);
+                string value = reader.ReadLine().Trim().Split(sep)[1];
+                pcutf = "+inf".Equals(value) ? double.MaxValue : double.Parse(value);
+                value = reader.ReadLine().Trim().Split(sep)[1];
+                zto1 = bool.Parse(value);
+            }
+        }
+
+        private static bool IsOdd(int value)
+        {
+            return (value & 1) == 1;
+        }
+    }
+}

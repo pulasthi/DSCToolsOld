@@ -1,0 +1,169 @@
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
+using System.Text;
+using Common;
+
+namespace ScattersLargeScale
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string nwMatrix = args[0]; // pair distances will represent the x-values in the plot
+            string blastMatrix = args[1]; // pair distances will represent the y-values in the plot
+            int size = int.Parse(args[2]);
+            string outFile = Path.Combine(Path.GetDirectoryName(nwMatrix) , "raw-blast-bitscore-Vs-raw-nw-pid.txt");
+
+            double xmaxbound = 1.5;
+            double ymaxbound = 1.5;
+            int xres = 50;
+            int yres = 50;
+            double alpha = 2.0;
+            double pcutf = 0.85;
+            bool zto1 = true;
+
+            double xmax = 1.0;
+            double xmin = 0.0;
+
+            double ymax = 1.0;
+            double ymin = 0.0;
+
+            double deltax = (xmax - xmin) / xres;
+            double deltay = (ymax - ymin) / yres;
+
+            // Surface area of each small 2D square
+            double deltas = deltax * deltay;
+
+            long count = 0, cellmax = 0;
+            double cellmean = 0.0;
+            Hashtable cells = new Hashtable();
+            string cell;
+
+            int cellx, celly;
+            double x, y;
+
+            using (MatrixReader nwReader = new MatrixReader(nwMatrix, MatrixType.Int16, size),
+                blastReader = new MatrixReader(blastMatrix, MatrixType.Int16, size))
+            {
+                Console.Write("Reading matrices ... ");
+                Stopwatch watch = new Stopwatch();
+                watch.Start();
+                for (int i = 0; i < size; ++i)
+                {
+                    for (int j = i + 1; j < size; ++j)
+                    {
+                        // do for each pair in the top triangle (for both matrices)
+                        x = ((double) BitConverter.ToInt16(nwReader.Read(i, j), 0))/short.MaxValue;
+                        y = ((double) BitConverter.ToInt16(blastReader.Read(i, j), 0))/short.MaxValue;
+
+                        // Note. temp code to run off y > 0.9 for Prof. Fox.
+                        if (y > 0.9)
+                        {
+
+                            // Note. test code
+                            if (x > xmax || y > ymax || x < xmin || y < ymin)
+                            {
+                                // now this should never be reached
+                                Console.WriteLine("\nbad(1)-> x: " + x + " y:" + y);
+                                Console.ReadKey();
+                                return;
+                            }
+
+                            ++count;
+
+                            // cell number based on zero index from bottom left corner
+                            // if x is equal to xmax then it's placed in the last cell, which is xres-1 in zero based index
+                            // same is done for y when y == ymax
+                            cellx = x == xmax ? xres - 1 : (int) Math.Floor((x - xmin)/deltax);
+                            celly = y == ymax ? yres - 1 : (int) Math.Floor((y - ymin)/deltay);
+
+                            // Note. test code
+                            if (cellx >= xres || celly >= yres)
+                            {
+                                // now this should never be reached
+                                Console.WriteLine("\nbad(2)-> x: " + x + " y:" + y);
+                                Console.ReadKey();
+                                return;
+                            }
+
+                            cell = cellx + "," + celly;
+                            cells[cell] = cells.ContainsKey(cell) ? ((long) cells[cell]) + 1 : 1L;
+                            if ((long) cells[cell] > cellmax)
+                            {
+                                cellmax = (long) cells[cell];
+                            }
+                        }
+                    }
+                }
+                Console.WriteLine(" done.");
+
+                cellmean = ((double)count) / (xres * yres);
+
+                double power = cellmax < (alpha * cellmean) ? 1.0 : (Math.Log(alpha) / Math.Log(cellmax / cellmean));
+
+                // Constant value by which the number of points in a 2D square is multiplied.
+                // The resulting value is independent of the total number of points as well as 
+                // the x,y resolution. The mult value is a factor changing the z value scale.
+                double c = zto1 ? (1.0 / cellmax) : (1.0 / (count * deltas));
+
+
+                int xpointcount = 2 * xres;
+                int ypointcount = 2 * yres;
+
+                using (StreamWriter writer = new StreamWriter(outFile))
+                {
+                    writer.WriteLine("#xcoord\tycoord\thistogramValue");
+                    double cellvalue;
+                    for (int i = 0; i < xpointcount; i++)
+                    {
+                        x = xmin + ((Odd(i) ? (i + 1) / 2 : i / 2) * deltax);
+                        cellx = Odd(i) ? (i - 1) / 2 : i / 2;
+
+                        for (int j = 0; j < ypointcount; j++)
+                        {
+                            y = ymin + ((Odd(j) ? (j + 1) / 2 : j / 2) * deltay);
+                            celly = Odd(j) ? (j - 1) / 2 : j / 2;
+                            cell = cellx + "," + celly;
+
+                            cellvalue = Math.Pow(((cells.ContainsKey(cell) ? (long)cells[cell] : 0L) * c), power);
+
+                            // todo: commented for now
+                            // cellvalue = cellvalue > pcutf ? pcutf : cellvalue < ncutf ? ncutf : cellvalue;
+                            cellvalue = cellvalue > pcutf ? pcutf : cellvalue;
+
+                            writer.WriteLine(x + "\t" + y + "\t" + cellvalue);
+                        }
+                        writer.WriteLine();
+                    }
+
+                    // Fill up the remaining region from beyond x=xmax and y=ymax as zero 
+                    writer.WriteLine();
+                    writer.WriteLine(xmin + "\t" + ymax + "\t" + 0.0);
+                    writer.WriteLine(xmin + "\t" + ymaxbound + "\t" + 0.0);
+                    writer.WriteLine();
+                    writer.WriteLine(xmax + "\t" + ymax + "\t" + 0.0);
+                    writer.WriteLine(xmax + "\t" + ymaxbound + "\t" + 0.0);
+                    writer.WriteLine();
+                    writer.WriteLine(xmax + "\t" + ymin + "\t" + 0.0);
+                    writer.WriteLine(xmax + "\t" + ymaxbound + "\t" + 0.0);
+                    writer.WriteLine();
+                    writer.WriteLine(xmaxbound + "\t" + ymin + "\t" + 0.0);
+                    writer.WriteLine(xmaxbound + "\t" + ymaxbound + "\t" + 0.0);
+                }
+                watch.Stop();
+                Console.WriteLine("All done.");
+                Console.WriteLine("Total time: " + TimeSpan.FromMilliseconds(watch.ElapsedMilliseconds));
+
+            }
+        }
+
+        private static bool Odd(int x)
+        {
+            return x % 2 != 0;
+        }
+    }
+}

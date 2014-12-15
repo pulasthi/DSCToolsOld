@@ -1,0 +1,277 @@
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
+
+namespace Scatters
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            using (StreamReader reader = new StreamReader(args[0]))
+            {
+                char [] sep = new[]{' ','\t'};
+                /* Reading parameters file */
+
+                // Data directory
+                string dataDir = reader.ReadLine().Trim().Split(sep)[1];
+
+                // Data file prefix. Content of the data file should be idx<sep>xvalue<sep>yvalue
+                string dataFilePrefix = reader.ReadLine().Trim().Split(sep)[1];
+                
+                double xmin = double.Parse(reader.ReadLine().Trim().Split(sep)[1]);
+                double xmax = double.Parse(reader.ReadLine().Trim().Split(sep)[1]);
+                double ymin = double.Parse(reader.ReadLine().Trim().Split(sep)[1]);
+                double ymax = double.Parse(reader.ReadLine().Trim().Split(sep)[1]);
+                int xres = int.Parse(reader.ReadLine().Trim().Split(sep)[1]);
+                int yres = int.Parse(reader.ReadLine().Trim().Split(sep)[1]);
+                double mult = double.Parse(reader.ReadLine().Trim().Split(sep)[1]);
+                double alpha = double.Parse(reader.ReadLine().Trim().Split(sep)[1]);
+                string method = reader.ReadLine().Trim().Split(sep)[1];
+                
+
+                string[] dataFiles = Directory.GetFiles(dataDir, dataFilePrefix + "*.txt");
+                string outFile;
+                foreach (string dataFile in dataFiles)
+                {
+                    outFile = Path.Combine(dataDir, "scatter_hist_" + Path.GetFileName(dataFile));
+//                    HistogramScatter(dataFile, outFile, xmin, xmax, ymin, ymax, xres, yres, mult);
+
+                    // Note. test code
+                    if (dataFile.Contains("63"))
+                    {
+                        HistogramScatter(dataFile, outFile, xmin, xmax, ymin, ymax, xres, yres, mult, alpha,method);
+                    }
+                }
+            }
+        }
+
+        private static void HistogramScatter(string dataFile, string outFile, double xmin, double xmax, double ymin, double ymax, int xres, int yres, double mult, double alpha,string method)
+        {
+            char[] sep = new[] { ' ', '\t' };
+            double deltax = (xmax - xmin) / xres;
+            double deltay = (ymax - ymin) / yres;
+
+            // Surface area of each small 2D square
+            double deltas = deltax * deltay;
+
+
+            long count = 0, cellmax = 0;
+            double cellmean = 0.0;
+            Hashtable cells = new Hashtable();
+            string cell;
+
+            int cellx, celly;
+            double x, y;
+            using (StreamReader reader = new StreamReader(dataFile))
+            {
+                string[] splits;
+                
+                while (!reader.EndOfStream)
+                {
+                    splits = reader.ReadLine().Trim().Split(sep);
+                    if (splits[0].StartsWith("#")) continue; // ignore comment lines
+
+                    // original x and y values
+                    x = double.Parse(splits[1]);
+                    y = double.Parse(splits[2]);
+
+                    ++count;
+
+                    // cell number based on zero index from bottom left corner
+                    cellx = (int)Math.Floor((x - xmin) / deltax);
+                    celly = (int)Math.Floor((y - ymin) / deltay);
+
+                    // Note. test code
+                    if (cellx >= xres || celly >= yres)
+                    {
+                        Console.WriteLine("bad");
+                    }
+
+                    cell = cellx + "," + celly;
+                    cells[cell] = cells.ContainsKey(cell) ? ((long)cells[cell]) + 1 : 1L;
+                    if ((long)cells[cell] > cellmax)
+                    {
+                        cellmax = (long)cells[cell];
+                    }
+                }
+                cellmean = ((double) count)/(xres*yres);
+            }
+
+            double power = cellmax < (alpha*cellmean) ? 1.0 : (Math.Log(alpha)/Math.Log(cellmax/cellmean));
+
+            // Constant value by which the number of points in a 2D square is multiplied.
+            // The resulting value is independent of the total number of points as well as 
+            // the x,y resolution. The mult value is a factor changing the z value scale.
+            double c = mult / (count * deltas * (cellmax > 0 ? cellmax : 1));
+            
+//            Note. test code
+//            double c = 1;
+
+
+            int xpointcount = 2*xres;
+            int ypointcount = 2*yres;
+
+            using (StreamWriter writer = new StreamWriter(outFile))
+            {
+                writer.WriteLine("#xcoord\tycoord\thistogramValue");
+                double cellvalue, temp;
+                for (int i = 0; i < xpointcount; i++)
+                {
+                    x = xmin + ((Odd(i) ? (i + 1) / 2 : i / 2) * deltax);
+                    cellx = Odd(i) ? (i - 1)/2 : i/2;
+                    
+                    for (int j = 0; j < ypointcount; j++)
+                    {
+                        y = ymin + ((Odd(j) ? (j + 1)/2 : j/2)*deltay);
+                        celly = Odd(j) ? (j - 1)/2 : j/2;
+                        cell = cellx + "," + celly;
+
+                        if ("count".Equals(method))
+                        {
+                            cellvalue = (cells.ContainsKey(cell) ? (long)cells[cell] : 0L) * c;
+                        }
+                        else if ("log".Equals(method))
+                        {
+                            cellvalue = Math.Log((cells.ContainsKey(cell) ? (long) cells[cell] : 0L)*c);
+                        }
+                        else if ("power".Equals(method))
+                        {
+                            cellvalue = Math.Pow(((cells.ContainsKey(cell) ? (long) cells[cell] : 0L)*c), power);
+                        }
+                        else
+                        {
+                            // Default is count method
+                            cellvalue = (cells.ContainsKey(cell) ? (long)cells[cell] : 0L) * c;
+                        }
+
+                        writer.WriteLine(x + "\t" + y + "\t" + cellvalue);
+                    }
+                    writer.WriteLine();
+                }
+            }
+        }
+
+        private static  bool Odd(int x)
+        {
+            return x%2 != 0;
+        }
+
+        /*
+         * This simply produce a checkerboard (a grid). The average of the z values of four corners of each square represents the density for that square.
+         * 
+        private static void HistogramScatter(string dataFile, string outFile, double xmin, double xmax, double ymin, double ymax, int xres, int yres, double mult)
+        {
+            char [] sep = new[]{' ', '\t'};
+            double deltax = (xmax - xmin)/xres;
+            double deltay = (ymax - ymin)/yres;
+
+            // Surface area of each small 2D square
+            double deltas = deltax*deltay;
+
+            
+            long count = 0, cellmax = 0;
+            Hashtable cells = new Hashtable();
+            string cell;
+            using (StreamReader reader = new StreamReader(dataFile))
+            {
+                string[] splits;
+                double x, y;
+                int cellx, celly;
+                while (!reader.EndOfStream)
+                {
+                    splits = reader.ReadLine().Trim().Split(sep);
+                    if (splits[0].StartsWith("#")) continue; // ignore comment lines
+                    
+                    // original x and y values
+                    x = double.Parse(splits[1]);
+                    y = double.Parse(splits[2]);
+
+                    ++count;
+
+                    // cell number based on zero index from bottom left corner
+                    cellx = (int) Math.Floor((x - xmin)/deltax);
+                    celly = (int) Math.Floor((y - ymin)/deltay);
+
+                    // Note. test code
+                    if (cellx >= xres || celly >= yres)
+                    {
+                        Console.WriteLine("bad");
+                    }
+
+                    cell = cellx + "," + celly;
+                    cells[cell] = cells.ContainsKey(cell) ? ((long) cells[cell]) + 1 : 1L;
+                    if ((long)cells[cell] > cellmax)
+                    {
+                        cellmax = (long) cells[cell];
+                    }
+                }
+            }
+
+            // Constant value by which the number of points in a 2D square is multiplied.
+            // The resulting value is independent of the total number of points as well as 
+            // the x,y resolution. The mult value is a factor changing the z value scale.
+            double c = mult/(count*deltas*(cellmax > 0 ? cellmax : 1));
+//             Note. test code
+//            double c = 1;
+
+
+            int xpointcount = xres + 1;
+            int ypointcount = yres + 1;
+            
+            double [][] coords = new double[xpointcount][];
+            for (int i = 0; i < xpointcount; ++i)
+            {
+                coords[i] = new double[ypointcount];
+            }
+
+            using (StreamWriter writer = new StreamWriter(outFile))
+            {
+                writer.WriteLine("#xcoord\tycoord\thistogramValue");
+                double cellvalue, temp;
+                for (int i = 0; i < xres; i++)
+                {
+                    for (int j = 0; j < yres; j++)
+                    {
+                        cell = i + "," + j;
+                        cellvalue = (cells.ContainsKey(cell) ? (long) cells[cell] : 0L) * c;
+                        if (i == 0 && j == 0)
+                        {
+                            // bottom-left cell
+                            coords[i][j] = coords[i][j + 1] = coords[i + 1][j]  = coords[i + 1][j + 1] = cellvalue;
+                        }
+                        else if (i == 0 && j > 0)
+                        {
+                            // cells in left most edge except bottom-left cell
+                            temp = (cellvalue*4 - (coords[i][j] + coords[i + 1][j]))/2;
+                            coords[i][j + 1] = coords[i + 1][j + 1] = temp;
+                        }
+                        else if (i > 0 && j == 0)
+                        {
+                            // cells in the bottom most edge except bottom-left cell
+                            temp = (cellvalue*4 - (coords[i][j] + coords[i][j + 1]))/2;
+                            coords[i + 1][j] = coords[i + 1][j + 1] = temp;
+                        }
+                        else
+                        {
+                            // any other cell
+                            temp = (cellvalue*4 - (coords[i][j] + coords[i][j + 1] + coords[i + 1][j]));
+                            coords[i + 1][j + 1] = temp;
+                        }
+                        writer.WriteLine((xmin + i*deltax) +"\t" + (ymin+j*deltay) + "\t" + coords[i][j]);
+                    }
+                    writer.WriteLine((xmin + i * deltax) + "\t" + ymax + "\t" + coords[i][yres]);
+                    writer.WriteLine();
+                }
+
+                for (int j = 0; j < ypointcount; ++j)
+                {
+                    writer.WriteLine(xmax + "\t" + (ymin + j * deltay) + "\t" + coords[xres][j]);
+                }
+            }
+        }*/
+    }
+}

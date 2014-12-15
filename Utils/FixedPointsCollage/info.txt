@@ -1,0 +1,42 @@
+﻿outfile	"G:\My Box Files\SalsaBio\millions\446K_uniq\reclassification\regions\MultiDimensionalScaling\FixedPointRuns\MDSasChisq\FixedPointsCollage\allsmacof\446041_sequences_100K_fixed_collage.pviz"
+
+region	0
+clusters	"G:\My Box Files\SalsaBio\millions\446K_uniq\reclassification\regions\MultiDimensionalScaling\FullMDS\DASMACOF\r0\r0.125798.dasmacof.pid\Reclus\fungi_LSU_0(15)_to_0(19)_zeroidx.txt"
+fixedpts	"G:\My Box Files\SalsaBio\millions\446K_uniq\reclassification\regions\MultiDimensionalScaling\FixedPointRuns\MDSasChisq\r0\r0.125798.sample.28418.fixed.smacof.pid\SIMPLEpoints.txt"
+numfixed	28418
+
+region	1
+clusters	"G:\My Box Files\SalsaBio\millions\446K_uniq\reclassification\regions\MultiDimensionalScaling\FullMDS\DASMACOF\r1\r1.47039.dasmacof.pid\Reclus\fungi_LSU_1(2)_to_1(2)_zeroidx.txt"
+fixedpts	"G:\My Box Files\SalsaBio\millions\446K_uniq\reclassification\regions\MultiDimensionalScaling\FixedPointRuns\MDSasChisq\r1\r1.47039.sample.10482.fixed.smacof.pid\SIMPLEpoints.txt"
+numfixed	10482
+
+region	2
+clusters	"G:\My Box Files\SalsaBio\millions\446K_uniq\reclassification\regions\MultiDimensionalScaling\FullMDS\DASMACOF\r2\r2.124209.dasmacof.pid\Reclus\fungi_LSU_2(10)_to_2(21)_zeroidx.txt"
+fixedpts	"G:\My Box Files\SalsaBio\millions\446K_uniq\reclassification\regions\MultiDimensionalScaling\FixedPointRuns\MDSasChisq\r2\r2.124209.sample.27792.fixed.smacof.pid\SIMPLEpoints.txt"
+numfixed	27792
+
+region	3
+clusters	"G:\My Box Files\SalsaBio\millions\446K_uniq\reclassification\regions\MultiDimensionalScaling\FullMDS\DASMACOF\r3\Reclus\fungi_LSU_3(15)_to_3(26)_zeroidx.txt"
+fixedpts	"G:\My Box Files\SalsaBio\millions\446K_uniq\reclassification\regions\MultiDimensionalScaling\FixedPointRuns\MDSasChisq\r3\r3.39212.sample.8860.fixed.smacof.pid\SIMPLEpoints.txt"
+numfixed	8860
+
+region	4
+clusters	"G:\My Box Files\SalsaBio\millions\446K_uniq\reclassification\regions\MultiDimensionalScaling\FullMDS\DASMACOF\r4\Reclus\4(10)_{4+9}(2)\Reclus\fungi_LSU_4(12)_to_4(16)_zeroidx.txt"
+fixedpts	"G:\My Box Files\SalsaBio\millions\446K_uniq\reclassification\regions\MultiDimensionalScaling\FixedPointRuns\MDSasChisq\r4\r4.34761.sample.7764.fixed.smacof.pid\pid.points.txt"
+numfixed	7764
+
+region	5
+clusters	"G:\My Box Files\SalsaBio\millions\446K_uniq\reclassification\regions\MultiDimensionalScaling\FullMDS\DASMACOF\r5\Reclus\Reclus\fungi_LSU_5(26)_to_5(28)_zeroidx.txt"
+fixedpts	"G:\My Box Files\SalsaBio\millions\446K_uniq\reclassification\regions\MultiDimensionalScaling\FixedPointRuns\MDSasChisq\r5\r5.41870.sample.9462.fixed.smacof.pid\SIMPLEpoints.txt"
+numfixed	9462
+
+region	6
+clusters	"G:\My Box Files\SalsaBio\millions\446K_uniq\reclassification\regions\MultiDimensionalScaling\FullMDS\DASMACOF\r6\MPI\r6.22712.dasmacof.pid\Reclus\6(9)_to_6(8)\fungi_LSU_6(9)_to_6(8)_zeroidx.txt"
+fixedpts	"G:\My Box Files\SalsaBio\millions\446K_uniq\reclassification\regions\MultiDimensionalScaling\FixedPointRuns\MDSasChisq\r6\r6.22712.sample.4874.fixed.smacof.pid\SIMPLEpoints.txt"
+numfixed	4874
+
+region	7
+clusters	"G:\My Box Files\SalsaBio\millions\446K_uniq\reclassification\regions\MultiDimensionalScaling\FullMDS\DASMACOF\r7\Reclus\Reclus\fungi_LSU_7(9)_to_7(8)_zeroidx.txt"
+fixedpts	"G:\My Box Files\SalsaBio\millions\446K_uniq\reclassification\regions\MultiDimensionalScaling\FixedPointRuns\MDSasChisq\r7\r7.10440.sample.2348.fixed.smacof.pid\pointsGroup.txt"
+numfixed	2348
+

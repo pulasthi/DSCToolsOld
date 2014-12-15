@@ -1,0 +1,538 @@
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using Common;
+using MPI;
+using Salsa.Core;
+using Salsa.Core.Blas;
+
+#if USE_UINT16
+using TDistance = System.UInt16;
+#elif USE_INT16
+using TDistance = System.Int16;
+#else
+using TDistance = System.Double;
+#endif
+
+namespace ScattersLargeScaleEuclvsOrg
+{
+    class Program
+    {
+        private static string _mat;
+        private static string _pts;
+        private static int _size;
+        private static string _outdir;
+
+        static double xmaxbound = 1.0;
+        static double ymaxbound = 1.0;
+        static int xres = 50;
+        static int yres = 50;
+        static double alpha = 2.0;
+        static double pcutf = 0.85;
+        static bool zto1 = true;
+
+        static double xmaxWhole = double.NegativeInfinity;
+        static double xminWhole = double.PositiveInfinity;
+
+        static double ymaxWhole = double.NegativeInfinity;
+        static double yminWhole = double.PositiveInfinity;
+
+        static double xmaxSelected = double.NegativeInfinity;
+        static double xminSelected = double.PositiveInfinity;
+
+        static double ymaxSelected = double.NegativeInfinity;
+        static double yminSelected = double.PositiveInfinity;
+
+        private static int transfm;
+        private static double transfp, distcut;
+
+        private static  HashSet<int> selectedCnums = new HashSet<int>();
+
+
+        private static double deltaxWhole, deltayWhole, deltaxSelected, deltaySelected;
+
+        // Surface area of each small 2D square
+        private static double deltasWhole, deltasSelected;
+
+
+        static void Main(string[] args)
+        {
+            // Load the command line args into our helper class which allows us to name arguments
+            Arguments pargs = new Arguments(args);
+            pargs.Usage = "Usage: ScatterLargeScale.exe /config=<string>";
+
+            if (pargs.CheckRequired(new string[] { "config" }) == false)
+            {
+                Console.WriteLine(pargs.Usage);
+                return;
+            }
+
+            using (MPI.Environment env = new MPI.Environment(ref args))
+            {
+                ReadConfiguration(pargs);
+
+                Hashtable pnumToPointTable = new Hashtable();
+                ReadPoints(pnumToPointTable); // It's OK to read all the points by everyone as it won't take much space.
+
+                int rank = MPI.Communicator.world.Rank;
+                int worldSize = MPI.Communicator.world.Size;
+                Block[][] processToCloumnBlocks = BlockPartitioner.Partition(_size, _size, worldSize, worldSize);
+                Block[] myColumnBlocks = processToCloumnBlocks[rank];
+
+                PartialMatrix<TDistance> myRowStripMatrixForOriginal = new PartialMatrix<TDistance>(myColumnBlocks[0].RowRange, new Range(0, _size - 1));
+
+                ReadDistanceBlocks(rank, myRowStripMatrixForOriginal, myColumnBlocks, pnumToPointTable);
+
+                // Wait till everyone is done reading their blocks and have local min and max values
+                MPI.Communicator.world.Barrier();
+                Console.WriteLine("All are done reading distance blocks");
+                xminWhole = MPI.Communicator.world.Allreduce<double>(xminWhole, Operation<double>.Min);
+                xmaxWhole = MPI.Communicator.world.Allreduce<double>(xmaxWhole, Operation<double>.Max);
+                yminWhole = MPI.Communicator.world.Allreduce<double>(yminWhole, Operation<double>.Min);
+                ymaxWhole = MPI.Communicator.world.Allreduce<double>(ymaxWhole, Operation<double>.Max);
+
+                xminSelected = MPI.Communicator.world.Allreduce<double>(xminSelected, Operation<double>.Min);
+                xmaxSelected = MPI.Communicator.world.Allreduce<double>(xmaxSelected, Operation<double>.Max);
+                yminSelected = MPI.Communicator.world.Allreduce<double>(yminSelected, Operation<double>.Min);
+                ymaxSelected = MPI.Communicator.world.Allreduce<double>(ymaxSelected, Operation<double>.Max);
+
+                // todo : test code
+                if (rank ==0)
+                {
+                    Console.WriteLine("xmaxwhole:{0} xminwhole{1} ymaxwhole{2} yminwhole{3}", xmaxWhole, xminWhole, ymaxWhole, yminWhole);
+                    Console.WriteLine("xmaxselected:{0} xminselected{1} ymaxselected{2} yminselected{3}", xmaxSelected, xminSelected, ymaxSelected, yminSelected);
+                }
+
+                // global xmax, xmin, ymax, and ymin should be set by now
+                deltaxWhole = (xmaxWhole - xminWhole) / xres;
+                deltayWhole = (ymaxWhole - yminWhole) / yres;
+                deltasWhole = deltaxWhole * deltayWhole;
+
+                deltaxSelected = (xmaxSelected - xminSelected) / xres;
+                deltaySelected = (ymaxSelected - yminSelected) / yres;
+                deltasSelected = deltaxSelected * deltaySelected;
+
+                Hashtable cellsForWholeSample = new Hashtable();
+                Hashtable cellsForSelectedClusters = new Hashtable();
+                GeneratePartialHistograms(cellsForWholeSample, cellsForSelectedClusters, rank, myRowStripMatrixForOriginal, myColumnBlocks, pnumToPointTable);
+
+                // Wait till everyone is done their part of histogramming
+                MPI.Communicator.world.Barrier();
+                Console.WriteLine("All are done generating partial histograms");
+
+                Hashtable[] cellsArrayForWholeSample = new Hashtable[worldSize];
+                Hashtable[] cellsArrayForSelectedClusters = new Hashtable[worldSize];
+                MPI.Communicator.world.Gather(cellsForWholeSample, 0, ref cellsArrayForWholeSample);
+                MPI.Communicator.world.Gather(cellsForSelectedClusters, 0, ref cellsArrayForSelectedClusters);
+
+                if (rank == 0)
+                {
+                    // Rank 0 should have all the cells from each process by now.
+                    Console.WriteLine("Rank 0 starting to write density data file for whole sample");
+                    GenerateDensityDataFile(cellsArrayForWholeSample, xmaxWhole, xminWhole, ymaxWhole, yminWhole, deltaxWhole, deltayWhole, deltasWhole, "whole-");
+                    Console.WriteLine("Rank 0 done writing density data file for whole sample");
+                    Console.WriteLine("Rank 0 starting to write density data file for selected clusters");
+                    GenerateDensityDataFile(cellsArrayForSelectedClusters, xmaxSelected, xminSelected, ymaxSelected, yminSelected, deltaxSelected, deltaySelected, deltasSelected, "selected-");
+                    Console.WriteLine("Rank 0 done writing density data file for selected clusters");
+                }
+            }
+        }
+
+        private static void GenerateDensityDataFile(Hashtable[] cellsArray, double xmax, double xmin, double ymax, double ymin, double deltax, double deltay, double deltas, string prefix)
+        {
+            long cellmax = 0, count = 0;
+            Hashtable finalcells = new Hashtable();
+            foreach (Hashtable t in cellsArray)
+            {
+                foreach (DictionaryEntry kv in t)
+                {
+                    string cell = (string)kv.Key;
+                    long v = (long)kv.Value;
+                    finalcells[cell] = finalcells.ContainsKey(cell) ? ((long)finalcells[cell]) + v : v;
+                    if ((long)finalcells[cell] > cellmax)
+                    {
+                        cellmax = (long)finalcells[cell];
+                    }
+                    count += v;
+                }
+            }
+
+            double cellmean = ((double)count) / (xres * yres);
+            double power = cellmax < (alpha * cellmean) ? 1.0 : (Math.Log(alpha) / Math.Log(cellmax / cellmean));
+            // Constant value by which the number of points in a 2D square is multiplied.
+            // The resulting value is independent of the total number of points as well as 
+            // the x,y resolution. The mult value is a factor changing the z value scale.
+            double c = zto1 ? (1.0 / cellmax) : (1.0 / (count * deltas));
+
+            int xpointcount = 2 * xres;
+            int ypointcount = 2 * yres;
+
+            string outFile = Path.Combine(_outdir, prefix+
+                                          Path.GetFileNameWithoutExtension(_pts) + "-Vs-" +
+                                          Path.GetFileNameWithoutExtension(_mat) + ".txt");
+            using (StreamWriter writer = new StreamWriter(outFile))
+            {
+                writer.WriteLine("#xcoord\tycoord\thistogramValue");
+                double cellvalue;
+                for (int i = 0; i < xpointcount; i++)
+                {
+                    double x = xmin + ((IsOdd(i) ? (i + 1) / 2 : i / 2) * deltax);
+                    int cellx = IsOdd(i) ? (i - 1) / 2 : i / 2;
+
+                    for (int j = 0; j < ypointcount; j++)
+                    {
+                        double y = ymin + ((IsOdd(j) ? (j + 1) / 2 : j / 2) * deltay);
+                        int celly = IsOdd(j) ? (j - 1) / 2 : j / 2;
+                        string cell = cellx + "," + celly;
+
+                        cellvalue = Math.Pow(((finalcells.ContainsKey(cell) ? (long)finalcells[cell] : 0L) * c), power);
+
+                        // todo: commented for now
+                        // cellvalue = cellvalue > pcutf ? pcutf : cellvalue < ncutf ? ncutf : cellvalue;
+                        cellvalue = cellvalue > pcutf ? pcutf : cellvalue;
+
+                        writer.WriteLine(x + "\t" + y + "\t" + cellvalue);
+                    }
+                    writer.WriteLine();
+                }
+
+                // Fill up the remaining region from beyond x=xmax and y=ymax as zero 
+                writer.WriteLine();
+                writer.WriteLine(xmin + "\t" + ymax + "\t" + 0.0);
+                writer.WriteLine(xmin + "\t" + ymaxbound + "\t" + 0.0);
+                writer.WriteLine();
+                writer.WriteLine(xmax + "\t" + ymax + "\t" + 0.0);
+                writer.WriteLine(xmax + "\t" + ymaxbound + "\t" + 0.0);
+                writer.WriteLine();
+                writer.WriteLine(xmax + "\t" + ymin + "\t" + 0.0);
+                writer.WriteLine(xmax + "\t" + ymaxbound + "\t" + 0.0);
+                writer.WriteLine();
+                writer.WriteLine(xmaxbound + "\t" + ymin + "\t" + 0.0);
+                writer.WriteLine(xmaxbound + "\t" + ymaxbound + "\t" + 0.0);
+            }
+        }
+
+        private static void ReadPoints(Hashtable pnumToPointTable)
+        {
+            using (SimplePointsReader reader = new SimplePointsReader(_pts))
+            {
+                while (!reader.EndOfStream)
+                {
+                    Point p = reader.ReadPoint();
+                    // Assume p.Index is unique
+                    pnumToPointTable.Add(p.Index, p);
+                }
+            }
+        }
+
+        private static void GeneratePartialHistograms(Hashtable cellsForWholeSample, Hashtable cellsForSelectedClusters,
+            int rank, PartialMatrix<TDistance> myRowStripMatrixForOriginal, Block[] myBlocks, Hashtable pnumToPointTable)
+        {
+            for (int i = 0; i < myBlocks.Length; ++i)
+            {
+                Block block = myBlocks[i];
+                if ((rank == i) || (rank > i && !IsOdd(rank + i)) || (rank < i && IsOdd(rank + i)))
+                {
+                    // Interesting block for this process
+                    if (rank == i)
+                    {
+                        // Diagonal block
+                        for (int r = block.RowRange.StartIndex; r <= block.RowRange.EndIndex; ++r)
+                        {
+                            for (int c = block.ColumnRange.StartIndex; c < r; ++c)
+                            {
+                                // Each pair in block
+                                double xval = ((double)myRowStripMatrixForOriginal[r, c])/TDistance.MaxValue;
+
+                                // Skip if either point r or c is not in the points list (possible with deleted points when run with Manxcat)
+                                if (!pnumToPointTable.ContainsKey(r) || !pnumToPointTable.ContainsKey(c)) continue;
+
+                                double yval = GetEuclideanDistance(pnumToPointTable[r] as Point,
+                                                                    pnumToPointTable[c] as Point);
+                                // ignore values xvals greater than distcut when distcut is specified
+                                if (distcut > -1 && xval > distcut) continue; 
+
+                                if (transfm > -1)
+                                {
+                                    xval = Transform(xval);
+                                }
+                                UpdateCells(xval, yval, xmaxWhole, xminWhole, ymaxWhole, yminWhole, deltaxWhole, deltayWhole, cellsForWholeSample);
+
+                                // We consider only intra cluster pairs (p1,p2) where both p1,p2 belong to one cluster
+                                // when doing the combined histogram of selected clusters. So we will only check if p1,p2 belong 
+                                // to the same cluster in our set of selected clusters
+                                int rCnum = ((Point)pnumToPointTable[r]).Cluster;
+                                int cCnum = ((Point)pnumToPointTable[c]).Cluster;
+                                if (selectedCnums.Contains(rCnum) && selectedCnums.Contains(cCnum) && rCnum == cCnum)
+                                {
+                                    UpdateCells(xval, yval, xmaxSelected, xminSelected, ymaxSelected, yminSelected, deltaxSelected, deltaySelected, cellsForSelectedClusters);
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        // Non diagonal block
+                        for (int r = block.RowRange.StartIndex; r <= block.RowRange.EndIndex; ++r)
+                        {
+                            for (int c = block.ColumnRange.StartIndex; c <= block.ColumnRange.EndIndex; ++c)
+                            {
+                                // Each pair in block
+                                double xval = ((double)myRowStripMatrixForOriginal[r, c]) / TDistance.MaxValue;
+
+                                // Skip if either point r or c is not in the points list (possible with deleted points when run with Manxcat)
+                                if (!pnumToPointTable.ContainsKey(r) || !pnumToPointTable.ContainsKey(c)) continue;
+
+                                double yval = GetEuclideanDistance(pnumToPointTable[r] as Point,
+                                                                    pnumToPointTable[c] as Point);
+                                // ignore values xvals greater than distcut when distcut is specified
+                                if (distcut > -1 && xval > distcut) continue;
+
+                                if (transfm > -1)
+                                {
+                                    xval = Transform(xval);
+                                }
+                                UpdateCells(xval, yval, xmaxWhole, xminWhole, ymaxWhole, yminWhole, deltaxWhole, deltayWhole, cellsForWholeSample);
+
+                                // We consider only intra cluster pairs (p1,p2) where both p1,p2 belong to one cluster
+                                // when doing the combined histogram of selected clusters. So we will only check if p1,p2 belong 
+                                // to the same cluster in our set of selected clusters
+                                int rCnum = ((Point)pnumToPointTable[r]).Cluster;
+                                int cCnum = ((Point)pnumToPointTable[c]).Cluster;
+                                if (selectedCnums.Contains(rCnum) && selectedCnums.Contains(cCnum) && rCnum == cCnum)
+                                {
+                                    UpdateCells(xval, yval, xmaxSelected, xminSelected, ymaxSelected, yminSelected, deltaxSelected, deltaySelected, cellsForSelectedClusters);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        private static double Transform(double xval)
+        {
+            if (transfm == 10)
+            {
+                xval= Math.Min(1.0, xval);
+                return Math.Pow(xval, transfp);
+            }
+            return xval;
+        }
+
+        private static void ReadDistanceBlocks(int rank, PartialMatrix<TDistance> myRowStripMatrixForOriginal, Block[] myColumnBlocks, Hashtable pnumToPointTable)
+        {
+#if USE_UINT16
+            using (MatrixReader matAReader = new MatrixReader(_mat, MatrixType.UInt16, _size))
+#elif USE_INT16
+            using (MatrixReader matReader = new MatrixReader(_mat, MatrixType.Int16, _size))
+#else
+            using (MatrixReader matAReader = new MatrixReader(_mat, MatrixType.Double, _size))
+#endif
+            {
+                for (int i = 0; i < myColumnBlocks.Length; ++i)
+                {
+                    Block block = myColumnBlocks[i];
+                    if ((rank == i) || (rank > i && !IsOdd(rank + i)) || (rank < i && IsOdd(rank + i)))
+                    {
+                        // Interesting block for this process
+                        if (rank == i)
+                        {
+                            // Diagonal block
+                            for (int r = block.RowRange.StartIndex; r <= block.RowRange.EndIndex; ++r) // block.RowRange should be equivalent to myRowStripMatrix's row range
+                            {
+                                for (int c = block.ColumnRange.StartIndex; c < r; ++c)
+                                {
+                                    // Each pair in block
+                                    TDistance t = FromArrayToTdist(matReader.Read(r, c));
+                                    myRowStripMatrixForOriginal[r, c] = t;
+
+                                    double x = ((double) t)/TDistance.MaxValue;
+
+                                    // Skip if either point r or c is not in the points list (possible with deleted points when run with Manxcat)
+                                    if (!pnumToPointTable.ContainsKey(r) || !pnumToPointTable.ContainsKey(c)) continue;
+
+                                    double y = GetEuclideanDistance(pnumToPointTable[r] as Point,
+                                                                    pnumToPointTable[c] as Point);
+
+                                    // ignore values xvals greater than distcut when distcut is specified
+                                    if (distcut > -1 && x > distcut) continue;
+
+                                    if (transfm > -1)
+                                    {
+                                        x = Transform(x);
+                                    }
+
+                                    UpdateMinMax(x, y, ref xmaxWhole, ref xminWhole, ref ymaxWhole, ref yminWhole);
+
+                                    // We consider only intra cluster pairs (p1,p2) where both p1,p2 belong to one cluster
+                                    // when doing the combined histogram of selected clusters. So we will only check if p1,p2 belong 
+                                    // to the same cluster in our set of selected clusters
+                                    int rCnum = ((Point)pnumToPointTable[r]).Cluster;
+                                    int cCnum = ((Point)pnumToPointTable[c]).Cluster;
+                                    if (selectedCnums.Contains(rCnum) && selectedCnums.Contains(cCnum) && rCnum == cCnum)
+                                    {
+                                        UpdateMinMax(x, y, ref xmaxSelected, ref xminSelected, ref ymaxSelected, ref yminSelected);
+                                    }
+                                }
+                            }
+                        }
+                        else
+                        {
+                            // Non diagonal block
+                            for (int r = block.RowRange.StartIndex; r <= block.RowRange.EndIndex; ++r)
+                            {
+                                for (int c = block.ColumnRange.StartIndex; c <= block.ColumnRange.EndIndex; ++c)
+                                {
+                                    // Each pair in block
+                                    TDistance t = FromArrayToTdist(matReader.Read(r, c));
+                                    myRowStripMatrixForOriginal[r, c] = t;
+
+                                    double x = ((double)t) / TDistance.MaxValue;
+
+                                    // Skip if either point r or c is not in the points list (possible with deleted points when run with Manxcat)
+                                    if (!pnumToPointTable.ContainsKey(r) || !pnumToPointTable.ContainsKey(c)) continue;
+
+                                    double y = GetEuclideanDistance(pnumToPointTable[r] as Point,
+                                                                    pnumToPointTable[c] as Point);
+
+                                    // ignore values xvals greater than distcut when distcut is specified
+                                    if (distcut > -1 && x > distcut) continue;
+
+                                    if (transfm > -1)
+                                    {
+                                        x = Transform(x);
+                                    }
+
+                                    UpdateMinMax(x, y, ref xmaxWhole, ref xminWhole, ref ymaxWhole, ref yminWhole);
+
+                                    // We consider only intra cluster pairs (p1,p2) where both p1,p2 belong to one cluster
+                                    // when doing the combined histogram of selected clusters. So we will only check if p1,p2 belong 
+                                    // to the same cluster in our set of selected clusters
+                                    int rCnum = ((Point)pnumToPointTable[r]).Cluster;
+                                    int cCnum = ((Point)pnumToPointTable[c]).Cluster;
+                                    if (selectedCnums.Contains(rCnum) && selectedCnums.Contains(cCnum) && rCnum == cCnum)
+                                    {
+                                        UpdateMinMax(x, y, ref xmaxSelected, ref xminSelected, ref ymaxSelected, ref yminSelected);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        private static void UpdateMinMax(double x, double y, ref double xmax, ref double xmin, ref double ymax, ref double ymin)
+        {
+            if (x > xmax)
+            {
+                xmax = x;
+            }
+
+            if (x < xmin)
+            {
+                xmin = x;
+            }
+
+            if (y > ymax)
+            {
+                ymax = y;
+            }
+
+            if (y < ymin)
+            {
+                ymin = y;
+            }
+        }
+
+        private static void UpdateCells(double x, double y, double xmax, double xmin, double ymax, double ymin, double deltax, double deltay, Hashtable cells)
+        {
+            // cell number based on zero index from bottom left corner
+            // if x is equal to xmax then it's placed in the last cell, which is xres-1 in zero based index
+            // same is done for y when y == ymax
+            int cellx = x == xmax ? xres - 1 : (int)Math.Floor((x - xmin) / deltax);
+            int celly = y == ymax ? yres - 1 : (int)Math.Floor((y - ymin) / deltay);
+
+            if (x > xmax || y > ymax || x < xmin || y < ymin)
+            {
+                // now this should never be reached
+                throw new Exception("bad(1)-> x: " + x + " y: " + y + " xmax: " + xmax + " xmin: " + xmin + " ymax: " +
+                                    ymax + " ymin: " + ymin);
+            }
+
+            if (cellx >= xres || celly >= yres)
+            {
+                // now this should never be reached
+                throw new Exception("bad(2)-> x: " + x + " y:" + y + " xmax: " + xmax + " xmin: " + xmin + " ymax: " +
+                                    ymax + " ymin: " + ymin + " cellx: " + cellx + " celly: " + celly);
+            }
+
+            string cell = cellx + "," + celly;
+            cells[cell] = cells.ContainsKey(cell) ? ((long)cells[cell]) + 1 : 1L;
+        }
+
+        private static TDistance FromArrayToTdist(byte[] xarr)
+        {
+#if USE_UINT16
+           return BitConverter.ToUInt16(xarr, 0);
+#elif USE_INT16
+           return BitConverter.ToInt16(xarr, 0);
+#else
+           return BitConverter.ToDouble(xarr, 0);
+#endif
+        }
+
+        static double GetEuclideanDistance(Point p, Point q)
+        {
+            return Math.Sqrt(Math.Pow((p.X - q.X), 2) + Math.Pow((p.Y - q.Y), 2) + Math.Pow((p.Z - q.Z), 2));
+        }
+
+        private static void ReadConfiguration(Arguments pargs)
+        {
+            string config = pargs.GetValue<string>("config");
+            using (StreamReader reader = new StreamReader(config))
+            {
+                char[] sep = new[] { ' ', '\t' };
+                /* Reading parameters file */
+                _mat = reader.ReadLine().Trim().Split(sep)[1];
+                _pts = reader.ReadLine().Trim().Split(sep)[1];
+                _size = int.Parse(reader.ReadLine().Trim().Split(sep)[1]);
+                _outdir = reader.ReadLine().Trim().Split(sep)[1];
+
+                xmaxbound = double.Parse(reader.ReadLine().Trim().Split(sep)[1]);
+                ymaxbound = double.Parse(reader.ReadLine().Trim().Split(sep)[1]);
+                xres = int.Parse(reader.ReadLine().Trim().Split(sep)[1]);
+                yres = int.Parse(reader.ReadLine().Trim().Split(sep)[1]);
+                alpha = double.Parse(reader.ReadLine().Trim().Split(sep)[1]);
+                string value = reader.ReadLine().Trim().Split(sep)[1];
+                pcutf = "+inf".Equals(value) ? double.MaxValue : double.Parse(value);
+                value = reader.ReadLine().Trim().Split(sep)[1];
+                zto1 = bool.Parse(value);
+                value = reader.ReadLine().Trim().Split(sep)[1];
+                transfm = int.Parse(value);
+                value = reader.ReadLine().Trim().Split(sep)[1];
+                transfp = transfm > -1 ? double.Parse(value) : -1.0;
+                value = reader.ReadLine().Trim().Split(sep)[1];
+                distcut = double.Parse(value);
+                value = reader.ReadLine().Trim().Split(sep)[1];
+                if(!string.IsNullOrEmpty(value) && !"none".Equals(value))
+                {
+                    foreach (int c in value.Trim().Split(new[] { ',' }).Select(x => int.Parse(x)))
+                    {
+                        if (!selectedCnums.Contains(c)){
+                            selectedCnums.Add(c);
+                        }
+                    }   
+                }
+            }
+        }
+
+        private static bool IsOdd(int value)
+        {
+            return (value & 1) == 1;
+        }
+    }
+}

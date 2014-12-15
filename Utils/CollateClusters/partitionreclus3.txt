@@ -1,0 +1,32 @@
+﻿pointsDir	C:\Users\sekanaya\Desktop\collateclusters3\pts
+pointFilePattern mpts{0}.txt
+clustersDir	C:\Users\sekanaya\Desktop\collateclusters3\clusters
+clusterDirpattern	{0}({1})_{2}({3})
+clusterFilePattern	cluster-M{0}-C{1}.txt
+outDir	C:\Users\sekanaya\Desktop\collateclusters3\plots
+outFilePattern	Mina_{0}({1})_to_{2}({3})_zeroidx.txt
+
+C	11	
+N	16
+join	none
+x	y	n
+4	2	2
+7	2	2
+8	2	2
+9	2	2
+10	2	2
+
+C	2
+N	25
+join	14+15
+x	y	n
+1	2	2
+
+C	10
+N	12
+join	none
+x	y	n
+5	3	3
+6	2	2
+8	2	2
+9	2	2

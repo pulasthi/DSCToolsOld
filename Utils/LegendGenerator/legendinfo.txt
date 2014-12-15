@@ -1,0 +1,3 @@
+﻿PointsDir	G:\SugarSyncSharedByMe\SalsaBio\millions\446K_uniq\regions\haixu_release\plots\mega_regions
+OutDir	C:\Users\sekanaya\Desktop\haixulegend
+Regions	7

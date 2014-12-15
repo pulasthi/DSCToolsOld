@@ -1,0 +1,34 @@
+﻿Amat	<path-to-orig-matrix-A>
+Aname	<name-given-for-matrix-A>
+Atransfm	-1 [-1 indicates no transform]
+Atransfp	2 [considered only with valid transfm, which is currently only "10"]
+Bmat	<path-to-orig-matrix-B>
+Bname	<name-given-for-matrix-B>
+Btransfm	10 [-1 indicates no transform]
+Btransfp	2 [considered only with valid transfm, which is currently only "10"]
+usetdistancemaxforA	True	[specify whether to divide the values in matrices by TDistance.MaxValue. Ignored if readPointsA=True]
+usetdistancemaxforA	True	[specify whether to divide the values in matrices by TDistance.MaxValue. Ignored if readPointsB=True]
+readPointsA	False	[Read points file and compute pairwise distances for A]
+readPointsB	False	[Read points file and compute pairwise distances for B]
+cols	95672	[Number of columns]
+rows	95672	[Number of rows, this may be different from number of columns for rectangular cases]
+outdir	<path-to-out-dir>
+xmaxbound	1.5	[x max size of canvas or -1 if not known in advance]
+ymaxbound	1.5	[y max size of canvas or -1 if not known in advance]
+xres	50	[x bins for density and histogram]
+yres	50	[y bins for density and histogram]
+alpha	2
+pcutf	0.85
+zto1	True
+distcutA	0.96 [-1 indicates no cut]
+distcutB	0.96 [-1 indicates no cut]
+mindistA	-1 [-1 indicates no cut on minimum]
+mindistB	-1 [-1 indicates no cut on minimum]
+clusterfile	<path-to-cluster-file>	[or "none"]
+clusters	[comma separated string of clusters to be considered as combined, or "none"]
+title	Type[{5}]\nDataSet: COG 95672 with Selected 7 Clusters - COG1126,COG4608,COG3839,COG0444,COG1131,COG1136,COG3842\nDensitySat[{0}] {1}: DCut[{2}] DistType[PID] ScoreMatrix[BLOSUM62] GO[-16] GE[-4]\n{3}: DCut[{4}] DistType[PID] ScoreMatrix[BLOSUM62] GO[-16] GE[-4]
+seqfile	<path-to-sequence-FastA-file	[or "none"]
+lengthcut	0.2	[-1 to turn off. Meaning when > -1 is to ignores a pair if ABS(L1-L2) > lengthcut * ((L1+L2)/2)]
+denomcuts	0.1,0.25,0.5,0.75	[-1 to ignore or reject if new denom < cut x old denom.]
+oldscoremat	<path-to-old-norm-swgscore-file>	[or "none"]
+newscoremat	<path-to-new-norm-swgscore-file>	[or "none"]

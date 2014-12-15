@@ -1,0 +1,5 @@
+﻿CenterFilesDir	G:\SugarSyncSharedByMe\SalsaBio\millions\446K_uniq\regions\centers\420centers\max_distance_analysis\center_files
+CenterSequences	G:\SugarSyncSharedByMe\SalsaBio\millions\446K_uniq\regions\centers\420centers\center_sequences.txt
+PointsFilesDir	G:\SugarSyncSharedByMe\SalsaBio\millions\446K_uniq\regions\centers\420centers\max_distance_analysis\point_files
+IndexFilesDir	G:\SugarSyncSharedByMe\SalsaBio\millions\446K_uniq\regions\centers\420centers\max_distance_analysis\index_files
+OutDir	G:\SugarSyncSharedByMe\SalsaBio\millions\446K_uniq\regions\centers\420centers\max_distance_analysis

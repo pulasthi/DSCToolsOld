@@ -1,0 +1,20 @@
+﻿pointsDir	C:\Users\sekanaya\Desktop\collateclusters-divergent\pts
+pointFilePattern mpts{0}.txt
+clustersDir	C:\Users\sekanaya\Desktop\collateclusters-divergent\clusters
+clusterDirpattern	{0}({1})_{2}({3})
+clusterFilePattern	cluster-M{0}-C{1}.txt
+outDir	C:\Users\sekanaya\Desktop\collateclusters-divergent\plots
+outFilePattern	divergent_{0}({1})_to_{2}({3})_zeroidx.txt
+outPlotFilePattern	divergent_{0}({1})_to_{2}({3})_zeroidx.pviz
+outLablesFilePattern	divergent_{0}({1})_to_{2}({3})_zeroidx_labels.txt
+
+C	0	
+N	23
+join	12+17+18
+labelsFile	G:\SugarSyncSharedByMe\SalsaBio\haixu\qiime_mother_pwc\mock_data\manxcat\divergent\divergent_0(6)_to_0(23)[12+17+18]_zeroidx_labels.txt
+x	y	n
+14	2	2
+16	2	2
+
+
+

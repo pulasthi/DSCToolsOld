@@ -1,0 +1,11 @@
+﻿PointsFile	G:\SugarSyncSharedByMe\SalsaBio\millions\446K_uniq\regions\centers\420centers\max_distance_analysis\420_point_coordinates_from_megaregions.txt
+ClusterFile	G:\SugarSyncSharedByMe\SalsaBio\millions\446K_uniq\regions\centers\420centers\clusters_with_420_classified_only420pts.txt
+OutDirectory	G:\SugarSyncSharedByMe\SalsaBio\millions\446K_uniq\regions\centers\420centers\max_distance_analysis
+
+ClusterCount	120
+CentersPerCluster	3
+Classifications	3	// 120 clusters are classfied into 3 groups. So 420 points int total are grouped into 3
+
+xres	50
+
+Name	Histograms of MaxDistance for 446K Centers

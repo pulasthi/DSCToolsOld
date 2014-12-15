@@ -1,0 +1,11 @@
+﻿Dir	G:\SugarSyncSharedByMe\SalsaBio\cog\100k\manxcat\blast\density\all-in-one
+#pref	xlabel	ylabeladditionals
+A	Raw-DistCut[0.96]-Blast-BitScore	Chisq[1]
+B	TM[10]-TP[2]-DistCut[0.96]-Blast-BitScore	Chisq[2]
+C	TM[10]-TP[3]-DistCut[0.96]-Blast-BitScore	Chisq[2]-W[0]
+D	TM[10]-TP[4]-DistCut[0.96]-Blast-BitScore	Chisq[2]-W[0]
+E	TM[10]-TP[4]-DistCut[0.96]-Blast-BitScore	Chisq[1]-W[]
+F	TM[10]-TP[6]-DistCut[0.96]-Blast-BitScore	Chisq[1]-W[]
+H	TM[10]-TP[2]-DistCut[0.96]-Blast-BitScore	Chisq[1]-W[0]
+I	TM[10]-TP[2]-DistCut[-1]-Blast-PID	Chisq[1]-W[0]
+J	TM[10]-TP[4]-DistCut[0.96]-Blast-PID	Chisq[1]-W[0]

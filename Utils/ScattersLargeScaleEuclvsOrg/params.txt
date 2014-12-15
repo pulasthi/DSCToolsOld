@@ -1,0 +1,15 @@
+﻿mat	<path-to-orig-matrix>
+pts	<path-to-x,y,z-coords>
+size	<size>
+outdir	<path-to-out-directory>
+xmaxbound	1.5
+ymaxbound	1.5
+xres	50
+yres	50
+alpha	2
+pcutf	0.85
+zto1	True
+transfm	10 [-1 indicates no transform]
+transfp	2 [considered only with valid transfm, which is currently only "10"]
+distcut	0.96 [-1 indicates no cut]
+clusters	[comma separated string of clusters to be considered as combined or "none"]
