@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XMLTester", "XMLTester\XMLTester.csproj", "{44904859-7B11-4CD6-9724-846F9B8BAA0E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DelegatesEvents", "DelegatesEvents\DelegatesEvents.csproj", "{20BE45A7-F63D-44D9-9363-551F192656DF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{44904859-7B11-4CD6-9724-846F9B8BAA0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44904859-7B11-4CD6-9724-846F9B8BAA0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44904859-7B11-4CD6-9724-846F9B8BAA0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44904859-7B11-4CD6-9724-846F9B8BAA0E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{20BE45A7-F63D-44D9-9363-551F192656DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20BE45A7-F63D-44D9-9363-551F192656DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20BE45A7-F63D-44D9-9363-551F192656DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20BE45A7-F63D-44D9-9363-551F192656DF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

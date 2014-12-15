@@ -1,0 +1,42 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NeedlemanWunsch", "NeedlemanWunsch.csproj", "{18C8507C-687E-473B-BC75-6B324581F318}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Salsa.CoreTPL", "..\..\..\..\Services\SalsaTPL\Salsa.CoreTPL\Salsa.CoreTPL.csproj", "{B9B1F4DA-18CB-41C9-BADC-A280DCE28FDB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|Mixed Platforms = Debug|Mixed Platforms
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|Mixed Platforms = Release|Mixed Platforms
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{18C8507C-687E-473B-BC75-6B324581F318}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{18C8507C-687E-473B-BC75-6B324581F318}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{18C8507C-687E-473B-BC75-6B324581F318}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{18C8507C-687E-473B-BC75-6B324581F318}.Debug|x86.ActiveCfg = Debug|x86
+		{18C8507C-687E-473B-BC75-6B324581F318}.Debug|x86.Build.0 = Debug|x86
+		{18C8507C-687E-473B-BC75-6B324581F318}.Release|Any CPU.ActiveCfg = Release|x86
+		{18C8507C-687E-473B-BC75-6B324581F318}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{18C8507C-687E-473B-BC75-6B324581F318}.Release|Mixed Platforms.Build.0 = Release|x86
+		{18C8507C-687E-473B-BC75-6B324581F318}.Release|x86.ActiveCfg = Release|x86
+		{18C8507C-687E-473B-BC75-6B324581F318}.Release|x86.Build.0 = Release|x86
+		{B9B1F4DA-18CB-41C9-BADC-A280DCE28FDB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9B1F4DA-18CB-41C9-BADC-A280DCE28FDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9B1F4DA-18CB-41C9-BADC-A280DCE28FDB}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{B9B1F4DA-18CB-41C9-BADC-A280DCE28FDB}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{B9B1F4DA-18CB-41C9-BADC-A280DCE28FDB}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B9B1F4DA-18CB-41C9-BADC-A280DCE28FDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9B1F4DA-18CB-41C9-BADC-A280DCE28FDB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B9B1F4DA-18CB-41C9-BADC-A280DCE28FDB}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{B9B1F4DA-18CB-41C9-BADC-A280DCE28FDB}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{B9B1F4DA-18CB-41C9-BADC-A280DCE28FDB}.Release|x86.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Salsa.Core.Configuration.ConfigurationMgr">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEgIAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAA=</HashCode>
+      <FileName>ConfigurationMgr.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Salsa.Core.Configuration.ConfigurationSectionCollection">
+    <Position X="4.5" Y="0.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABAAAAAAACAAAAAAQAAAAAAAAAEAAAAAAAAAAA=</HashCode>
+      <FileName>ConfigurationSectionCollection.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Salsa.Core.Configuration.ConfigurationSection">
+    <Position X="2.5" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>ConfigurationSection.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Salsa.Core.Configuration.ManxcatConfigurationSection" Collapsed="true">
+    <Position X="3.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>w0jLUIhWGAAyjjkCNz7aHkIa+J6njywXgNChLEMSYj4=</HashCode>
+      <FileName>sections\ManxcatConfigurationSection.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Salsa.Core.Configuration.PairwiseConfigurationSection" Collapsed="true">
+    <Position X="1.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QQDNQEgBCBkCqjkwkjEYnHAYeAjUjy1SANnFoQASQFo=</HashCode>
+      <FileName>sections\PairwiseConfigurationSection.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Tahoma" Size="8.25" />
+</ClassDiagram>

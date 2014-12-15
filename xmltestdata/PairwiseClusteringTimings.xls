@@ -1,0 +1,2 @@
+Duration(ms)	HPDuration(us)	Thread#	MPIperNode	Node#	Pattern	Parallelism	Point#/Process	Point#/Global	maxNcent	PTsplitting	Ratio1	MPIReduce	Ratio2	MPISRBasic	Ratio3	MPISREigen	Ratio4	MPIBdcast	Ratio5	DataFileName	CurrentTime	ProcessorName
+772623	770280641	1	24	32	1x24x32	768	0	501	6	613664	0.7967	91617	0.1189	122745	0.1594	292585	0.3798	1509	0.002	\\tempest\c$\Salsa\Evaluations\Data\xmltestdata\distances.txt	10/27/2009 2:11:56 PM	TEMPEST-CN01.ads.iu.edu

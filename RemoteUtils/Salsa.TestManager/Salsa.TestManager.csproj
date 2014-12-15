@@ -1,0 +1,208 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{E5973971-D445-4926-B818-9F8B6958E3C8}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Salsa.TestManager</RootNamespace>
+    <AssemblyName>Salsa.TestManager</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <SccProjectName>Svn</SccProjectName>
+    <SccLocalPath>Svn</SccLocalPath>
+    <SccAuxPath>Svn</SccAuxPath>
+    <SccProvider>SubversionScc</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Hpc.Scheduler, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Program Files\Microsoft HPC Pack 2008 SDK\Bin\Microsoft.Hpc.Scheduler.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Hpc.Scheduler.Properties, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Program Files\Microsoft HPC Pack 2008 SDK\Bin\Microsoft.Hpc.Scheduler.Properties.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Hpc.Scheduler.Session, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Program Files\Microsoft HPC Pack 2008 SDK\Bin\Microsoft.Hpc.Scheduler.Session.dll</HintPath>
+    </Reference>
+    <Reference Include="Salsa.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Dependencies\Salsa.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\ManxcatController.cs" />
+    <Compile Include="Controllers\PairwiseClusteringController.cs" />
+    <Compile Include="Controllers\SmithwatermanController.cs" />
+    <Compile Include="dlgAddTask.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgAddTask.Designer.cs">
+      <DependentUpon>dlgAddTask.cs</DependentUpon>
+    </Compile>
+    <Compile Include="dlgPickHeadNode.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgPickHeadNode.Designer.cs">
+      <DependentUpon>dlgPickHeadNode.cs</DependentUpon>
+    </Compile>
+    <Compile Include="dlgViewComputeNodes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgViewComputeNodes.Designer.cs">
+      <DependentUpon>dlgViewComputeNodes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMain.Designer.cs">
+      <DependentUpon>frmMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HPCHelpers.cs" />
+    <Compile Include="JobType.cs" />
+    <Compile Include="Models\BaseJob.cs" />
+    <Compile Include="Models\BaseTask.cs" />
+    <Compile Include="Models\ManxcatJob.cs" />
+    <Compile Include="Models\ManxcatTask.cs" />
+    <Compile Include="Models\PairwiseClusteringJob.cs" />
+    <Compile Include="Models\PairwiseClusteringTask.cs" />
+    <Compile Include="Models\SmithwatermanJob.cs" />
+    <Compile Include="Models\SmithwatermanTask.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="dlgAddTask.resx">
+      <DependentUpon>dlgAddTask.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgPickHeadNode.resx">
+      <DependentUpon>dlgPickHeadNode.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgViewComputeNodes.resx">
+      <DependentUpon>dlgViewComputeNodes.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMain.resx">
+      <DependentUpon>frmMain.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\ManxcatView.resx">
+      <DependentUpon>ManxcatView.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\PairwiseClusteringView.resx">
+      <DependentUpon>PairwiseClusteringView.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\SmithwatermanView.resx">
+      <DependentUpon>SmithwatermanView.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\TaskView.resx">
+      <DependentUpon>TaskView.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="Properties\DataSources\Microsoft.Hpc.Scheduler.ISchedulerNode.datasource" />
+    <None Include="Properties\DataSources\Salsa.TestManager.Models.BaseTask.datasource" />
+    <None Include="Properties\DataSources\Salsa.TestManager.Models.ManxcatJob.datasource" />
+    <None Include="Properties\DataSources\Salsa.TestManager.Models.PairwiseClusteringJob.datasource" />
+    <None Include="Properties\DataSources\Salsa.TestManager.Models.SmithwatermanJob.datasource" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Views\ManxcatView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\ManxcatView.Designer.cs">
+      <DependentUpon>ManxcatView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PairwiseClusteringView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\PairwiseClusteringView.Designer.cs">
+      <DependentUpon>PairwiseClusteringView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SmithwatermanView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\SmithwatermanView.Designer.cs">
+      <DependentUpon>SmithwatermanView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TaskView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\TaskView.Designer.cs">
+      <DependentUpon>TaskView.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

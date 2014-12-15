@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfigTester", "ConfigTester\ConfigTester.csproj", "{21254372-A6CD-4DA0-81E1-6437C210FEAA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Salsa.Core", "..\..\Core\CSharp\Salsa.Core\Salsa.Core.csproj", "{B9B1F4DA-18CB-41C9-BADC-A280DCE28FDB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{21254372-A6CD-4DA0-81E1-6437C210FEAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21254372-A6CD-4DA0-81E1-6437C210FEAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21254372-A6CD-4DA0-81E1-6437C210FEAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21254372-A6CD-4DA0-81E1-6437C210FEAA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B9B1F4DA-18CB-41C9-BADC-A280DCE28FDB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9B1F4DA-18CB-41C9-BADC-A280DCE28FDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9B1F4DA-18CB-41C9-BADC-A280DCE28FDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9B1F4DA-18CB-41C9-BADC-A280DCE28FDB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

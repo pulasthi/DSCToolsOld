@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration name="Alu35339" xmlns="http://pervasivetechnologylabs.iu.edu">
+  <global>
+    <params>
+      <DataFileName>C:\Salsa\Evaluations\Alu35339\data.txt</DataFileName>
+      <DataPoints>35339</DataPoints>
+      <ProcessingOption>0</ProcessingOption>
+      <BaseResultDirectoryName>\\madrid-headnode\c$\Salsa\Evaluations\Alu35339\Results</BaseResultDirectoryName>
+      <RunSetLabel>Alu35339</RunSetLabel>
+      <ControlDirectoryName>\\madrid-headnode\c$\Salsa\Evaluations\Alu35339</ControlDirectoryName>
+      <MPIIOStrategy>0</MPIIOStrategy>
+      <DebugPrintOption>1</DebugPrintOption>
+    </params>
+  </global>
+
+  <components>
+    <component name="MDS" class="ConfigLib.MDSConfig">
+      <params>
+        <DataLabelsFileName></DataLabelsFileName>
+        <ReducedVectorOutputFileName>Points.txt</ReducedVectorOutputFileName>
+        <ClusterDirectory></ClusterDirectory>
+        <DistanceProcessingOption>0</DistanceProcessingOption>
+        <InitializationOption>0</InitializationOption>
+        <InitializationFileName></InitializationFileName>
+        <WeightingOption>0</WeightingOption>
+        <WeightingFileName></WeightingFileName>
+        <write2Das3D>True</write2Das3D>
+        <LocalVectorDimension>3</LocalVectorDimension>
+        <selectedvariedpoints></selectedvariedpoints>
+        <VariedPointCriterion>all</VariedPointCriterion>
+        <selectedvariedpointfile></selectedvariedpointfile>
+        <selectedfixedpoints></selectedfixedpoints>
+        <FixedPointCriterion>none</FixedPointCriterion>
+        <selectedfixedpointfile></selectedfixedpointfile>
+        <ConversionOption></ConversionOption>
+        <ConversionInformation></ConversionInformation>
+        <RotationOption>0</RotationOption>
+        <RotationLabelsFileName></RotationLabelsFileName>
+        <InitializationLoops>1</InitializationLoops>
+        <Chisqnorm>2</Chisqnorm>
+        <DistanceFormula>1</DistanceFormula>
+        <FullSecondDerivativeOption>0</FullSecondDerivativeOption>
+        <MinimumDistance>-0.001</MinimumDistance>
+        <FunctionErrorCalcMultiplier>10</FunctionErrorCalcMultiplier>
+        <ChisqPrintConstant>1</ChisqPrintConstant>
+        <maxit>80</maxit>
+        <nbadgo>6</nbadgo>
+        <ChisqChangePerPoint>0.001</ChisqChangePerPoint>
+        <FletcherRho>0.25</FletcherRho>
+        <FletcherSigma>0.75</FletcherSigma>
+        <Omega>1.25</Omega>
+        <OmegaOption>0</OmegaOption>
+        <QHighInitialFactor>0.01</QHighInitialFactor>
+        <QgoodReductionFactor>0.5</QgoodReductionFactor>
+        <QLimitscalculationInterval>1</QLimitscalculationInterval>
+        <extraprecision>0.05</extraprecision>
+        <addonforQcomputation>2</addonforQcomputation>
+        <InitialSteepestDescents>0</InitialSteepestDescents>
+        <TimeCutmillisec>-1</TimeCutmillisec>
+        <CGResidualLimit>1E-05</CGResidualLimit>
+        <PowerIterationLimit>200</PowerIterationLimit>
+        <eigenvaluechange>0.001</eigenvaluechange>
+        <eigenvectorchange>0.001</eigenvectorchange>
+        <derivtest>False</derivtest>
+        <RunNumber>10</RunNumber>
+        <ResultDirectoryExtension>ManxcatMDS Alu35339 D[2009-08-22] T[19-00-00] P[16x1x8]</ResultDirectoryExtension>
+        <TimingOutputFileName>ManxcatMDSTimings.xls</TimingOutputFileName>
+        <pattern>Machine:MADRID-101.ads.iu.edu 16x1x8</pattern>
+        <ThreadCount>16</ThreadCount>
+        <NodeCount>8</NodeCount>
+        <MPIperNodeCount>1</MPIperNodeCount>
+        <HistogramBinCount>100</HistogramBinCount>
+        <Extradata1></Extradata1>
+        <Extradata2></Extradata2>
+        <Extradata3></Extradata3>
+        <Extradata4></Extradata4>
+        <ExtraOption1>0</ExtraOption1>
+        <ConsoleDebugOutput>True</ConsoleDebugOutput>
+        <Comment>==== MDS Machine:MADRID-101.ads.iu.edu 16x1x8 ==== Option:0 PointCount_Global:35339 ==== Run Alu35339 10 == File C:\Salsa\Evaluations\Alu35339\data.txt == 8/22/2009 7:00:00 PM ==== </Comment>
+      </params>
+
+    </component>
+
+
+    <component name="PairwiseClustering" class="ConfigLib.PairwiseClusteringConfig">
+      <params>
+        <OutputDataFileName></OutputDataFileName>
+        <InputDataFileName></InputDataFileName>
+        <InputFormatStyle></InputFormatStyle>
+        <FamilySpecification></FamilySpecification>
+        <RandomInputCut>1.1</RandomInputCut>
+        <InputClusteredFileName></InputClusteredFileName>
+        <SelectedClusters></SelectedClusters>
+        <RunNumber>0</RunNumber>
+        <TransformDimension>4</TransformDimension>
+        <ResultDirectoryExtension></ResultDirectoryExtension>
+        <TimingOutputFileName>PairwiseClusteringTimings.xls</TimingOutputFileName>
+        <SMACOFInputFileName>SMACOFfromPatient.txt</SMACOFInputFileName>
+        <DataLabelsFileName>Alu35339Index.txt</DataLabelsFileName>
+        <PointPropertiesFileName></PointPropertiesFileName>
+        <FamilySMACOFFileName></FamilySMACOFFileName>
+        <ClusterSMACOFFileName></ClusterSMACOFFileName>
+        <GroupCenterSize>10</GroupCenterSize>
+        <maxNcent>4</maxNcent>
+        <splitorexpandit>1</splitorexpandit>
+        <pattern>Machine:TEMPEST-CN01.ads.iu.edu 1x24x32</pattern>
+        <ThreadCount>1</ThreadCount>
+        <NodeCount>32</NodeCount>
+        <MPIperNodeCount>24</MPIperNodeCount>
+        <ToosmalltoSplit>50</ToosmalltoSplit>
+        <MinEigtest>-0.01</MinEigtest>
+        <ConvergeIntermediateClusters>False</ConvergeIntermediateClusters>
+        <Waititerations>10</Waititerations>
+        <Epsi_max_change>0.001</Epsi_max_change>
+        <InitialCoolingFactor>0.9</InitialCoolingFactor>
+        <FineCoolingFactor>0.99</FineCoolingFactor>
+        <eigenvaluechange>0.001</eigenvaluechange>
+        <eigenvectorchange>0.001</eigenvectorchange>
+        <Iterationatend>2000</Iterationatend>
+        <ConvergenceLoopLimit>2000</ConvergenceLoopLimit>
+        <FreezingLimit>0.002</FreezingLimit>
+        <PowerIterationLimit>200</PowerIterationLimit>
+        <HistogramBinCount>100</HistogramBinCount>
+        <Extradata1></Extradata1>
+        <Extradata2></Extradata2>
+        <Extradata3></Extradata3>
+        <Extradata4></Extradata4>
+        <ExtraOption1>0</ExtraOption1>
+        <ConsoleDebugOutput>False</ConsoleDebugOutput>
+        <MinimumFeatureOverlap>50</MinimumFeatureOverlap>
+        <DistanceUndefinedOption>0</DistanceUndefinedOption>
+        <DistanceInfiniteOption>0</DistanceInfiniteOption>
+        <DistanceChoice>3</DistanceChoice>
+      </params>
+    </component>
+  </components>
+
+</configuration>

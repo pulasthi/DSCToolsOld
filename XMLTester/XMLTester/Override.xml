@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Orchestra xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Instruments>
+    <Instrument xsi:type="Brass">
+      <Name>Trumpet</Name>
+    </Instrument>
+    <Instrument xsi:type="Iron">
+      <Name>IronInstr</Name>
+    </Instrument>
+  </Instruments>
+</Orchestra>

@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanPageRankIndices", "CleanPageRankIndices\CleanPageRankIndices.csproj", "{131D7C20-EA60-4B3F-91AF-FD7EB67B3336}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SplitPageRankData", "SplitPageRankData\SplitPageRankData.csproj", "{F9471971-25D1-42B6-B35E-A435EA841EF3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SquarePageRankData", "SquarePageRankData\SquarePageRankData.csproj", "{77DFE70B-1BF5-47D6-A649-C07FD9ED197D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{131D7C20-EA60-4B3F-91AF-FD7EB67B3336}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{131D7C20-EA60-4B3F-91AF-FD7EB67B3336}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{131D7C20-EA60-4B3F-91AF-FD7EB67B3336}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{131D7C20-EA60-4B3F-91AF-FD7EB67B3336}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9471971-25D1-42B6-B35E-A435EA841EF3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9471971-25D1-42B6-B35E-A435EA841EF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9471971-25D1-42B6-B35E-A435EA841EF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9471971-25D1-42B6-B35E-A435EA841EF3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77DFE70B-1BF5-47D6-A649-C07FD9ED197D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77DFE70B-1BF5-47D6-A649-C07FD9ED197D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77DFE70B-1BF5-47D6-A649-C07FD9ED197D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77DFE70B-1BF5-47D6-A649-C07FD9ED197D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

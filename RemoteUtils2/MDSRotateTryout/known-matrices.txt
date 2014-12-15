@@ -1,0 +1,266 @@
+﻿#madrid [all]
+mito.mix.full	c:\remote\input\MitoMixFULL.txt
+mito.mix.full.sorted	c:\remote\input\MitoMixFULLSorted.txt
+DarTBFULL	c:\remote\input\DarTBFULL.txt
+DarTBFULLSorted	c:\remote\input\DarTBFULLSorted.txt
+DarTB60	c:\remote\input\DarTB-60ClusterRaw.txt
+DarTBSorted	c:\remote\input\DarTB-60ClusterSorted.txt
+m40k	C:\remote\input\cluster-M40000-C25828.txt
+m40k.25155	C:\remote\input\cluster-M40000-C25155.txt
+m40k.2344	C:\remote\input\cluster-M40000-C2344.txt
+m40k.25719	C:\remote\input\clusterFinal-M40000-C25719.txt
+m40k.28995	C:\remote\input\clusterFinal-M40000-C28995.txt
+m40k.28143	C:\remote\input\clusterFinal-M40000-C28143.txt
+m40k.5500	C:\remote\input\clusterFinal-M40000-C5500.txt
+m40k.30532	C:\remote\input\clusterFinal-M100000-C30532.txt
+m40k.33091	C:\remote\input\clusterFinal-M100000-C33091.txt
+m40k.24586	C:\remote\input\clusterFinal-M100000-C24586.txt
+m40k.7828	C:\remote\input\clusterFinal-M100000-C7828.txt
+m40k.26364	C:\remote\input\clusterFinal-M100000-C26364.txt
+m40k.32102	C:\remote\input\clusterFinal-M100000-C32102.txt
+m40k.20183	C:\remote\input\clusterFinal-M100000-C20183.txt
+m40k.10075	C:\remote\input\clusterFinal-M100000-C10075.txt
+m40k.29677	C:\remote\input\clusterFinal-M100000-C29677.txt
+m40k.2348	C:\remote\input\clusterFinal-M100000-C2348.txt
+m40k.33644	C:\remote\input\clusterFinal-M100000-C33644.txt
+m40k.820	C:\remote\input\clusterFinal-M100000-C820.txt
+m40k.1532	C:\remote\input\clusterFinal-M100000-C1532.txt
+m40k.23813	C:\remote\input\clusterFinal-M200000-C23813.txt
+Ch3-22971	C:\remote\input\clusterFinal-M200000-C22971.txt
+Ch1-28795	C:\remote\input\clusterFinal-M200000-C28795.txt
+Ch3-5320	C:\remote\input\clusterFinal-M200000-C5320.txt
+Ch1-4091	C:\remote\input\clusterFinal-M200000-C4091.txt
+Ch5-2769	C:\remote\input\clusterFinal-M200000-C2769.txt 
+Ch6-133	C:\remote\input\clusterFinal-M200000-C133.txt
+Ch4-9764	C:\remote\input\clusterFinal-M200000-C9764.txt 
+Ch5Sponge-243	C:\remote\input\clusterFinal-M200000-C243.txt 
+Ch6Sponge-7	C:\remote\input\clusterFinal-M200000-C7.txt 
+Ch4Sponge-942	C:\remote\input\clusterFinal-M200000-C942.txt
+Ch2Joined-34117	C:\remote\input\clusterFinal-M100000-C34117.txt
+tcga.10k.16pwc	C:\remote\input\tcga-features-10k-16pwc.csv
+tcga.200k	C:\remote\input\tcga-features-200k.csv
+tcga.200k.gtm20	C:\remote\input\tcga-features-200k.gtm20.txt
+tcga.10k	C:\remote\input\2.tcga-features-10k(16)_IC0.99_RF0.999_points_to_clusters.txt
+m128.c124.200k	C:\remote\input\cluster-200K-M128-C124.txt
+tcga.em40.200k	C:\remote\input\tcga-features-200k.em40.txt
+lymp.cmeans.4dagtm	C:\remote\input\LymphocytesCmeans4DAGTM.txt
+lymp.flame.plotviz	C:\remote\input\LymphocytesFLAMEPlotViz.txt
+lymp.flame.4dgtm	C:\remote\input\LymphocytesFlame4DAGTM.txt
+lung.all	C:\remote\input\lung-all.csv
+lung.all.gtm	C:\remote\input\lung-all-GTM-em40.txt
+lung.all.dasmacof	C:\remote\input\dasmacof_points_lung-all-85399-54d.txt
+lung.all.sammon	C:\remote\input\manxcat_sammon_points_lung-all-85399-54d.txt
+lung.all.sammon.4iter	C:\remote\input\manxcat_sammon_points_lung-all-85399-54d_4iter.txt
+lymp.smacof	C:\remote\input\smacof_mds_lymphocytes_20054.txt
+lymp.5c.4dim	C:\remote\input\Lymphocytes-20054-5c-4dim.csv
+small.2048	C:\remote\input\Small2048.txt
+large.2048	C:\remote\input\Large2048.txt
+i400	C:\remote\input\I400DatingRating.txt
+m20k.c29882	C:\remote\input\clusterFinal-M200000-C29882.txt
+m20k.c29133	C:\remote\input\clusterFinal-M200000-C29133.txt
+m20k.c27847	C:\remote\input\clusterFinal-M200000-C27847.txt
+m20k.c4244	C:\remote\input\clusterFinal-M200000-C4244.txt
+m20k.c33791	C:\remote\input\clusterFinal-M200000-C33791.txt
+m20k.c760	C:\remote\input\clusterFinal-M200000-C760.txt
+m20k.c34152	C:\remote\input\clusterFinal-M200000-C34152.txt
+m20k.c408	C:\remote\input\clusterFinal-M200000-C408.txt
+m20k.c34161	C:\remote\input\clusterFinal-M200000-C34161.txt
+m20k.c535	C:\remote\input\clusterFinal-M200000-C535.txt
+m20k.c34604	C:\remote\input\clusterFinal-M200000-C34604.txt
+m20k.c34633	C:\remote\input\clusterFinal-M200000-C34633.txt
+m20k.c34606	C:\remote\input\clusterFinal-M200000-C34606.txt
+K6Spg1-31156	C:\remote\input\clusterFinal-M100000-C31156.txt
+m20k.c20107	C:\remote\input\clusterFinal-M200000-C20107.txt
+Spg1Anal-10483	C:\remote\input\clusterFinal-M200000-C10483.txt
+Spg1Join-30424	C:\remote\input\clusterFinal-M200000-C30424.txt
+NoSpg-48606	C:\remote\input\clusterFinal-M200000-C48606.txt
+m100k.c28222	C:\remote\input\clusterFinal-M100000-C28222.txt
+#
+#
+#
+tempest [all]
+lung.all.euclidean	F:\Salsa\saliya\vectors\input\headless-lung-all-85399-54d_c#.bin
+#
+#madrid [all] and tempest [all]
+mina.6822	c:\remote\input\distance_6822.bin
+haixu.847	c:\remote\input\haixu_region_1(6)_6_847pts.bin
+
+cog.blast.5000	c:\remote\input\cog_95672_bitscore_refined_5K_c#.bin
+cog.blast.10000	c:\remote\input\cog_95672_bitscore_refined_10K_c#.bin
+cog.blast.pid.first5k	c:\remote\input\cog_95672_percentage_refined_first5k_c#.bin
+#
+#
+#tempest [all]
+cog.blast.50000 F:\Salsa\saliya\cog\100k\input\cog_95672_bitscore_refined_first50k_c#.bin
+cog.blast.95672 F:\Salsa\saliya\cog\100k\input\cog_95672_bitscore_refined_c#.bin
+cog.blast.pid.95672	F:\Salsa\saliya\cog\100k\input\cog_95672_percentage_refined_c#.bin
+cog.blast.pid.50000	F:\Salsa\saliya\cog\100k\input\cog_95672_percentage_refined_first50k_c#.bin
+cog.nw.95672 F:\Salsa\saliya\cog\100k\input\cog_95672_nw_c#.bin
+cog.nw.95672.sqrt4d	F:\Salsa\saliya\cog\100k\input\cog_95672_nw_4d_sqrt_c#.bin
+cog.swg.blosum62.95672	F:\Salsa\saliya\cog\100k\input\cog_95672_swg_blosum62_c#.bin
+cog.swg.blosum62.normscore.95672	F:\Salsa\saliya\cog\100k\input\cog_95672_swg_distance_normscore_c#.bin
+cog.swg.blosum62.new.normscore.95672	F:\Salsa\saliya\cog\100k\input\cog_95672_swg_blosum62_newnormscore_c#.bin
+cog.new.nw.blosum62.pid.188234	F:\Salsa\saliya\cog\183k\input\cog_4872+183362_nw_pid_c#.bin
+cog.new.nw.blosum62.pid.4872	F:\Salsa\saliya\cog\183k\input\cog_4872_nw_pid_c#.bin
+cog.psi.nw.pid.4872	F:\Salsa\saliya\cog\psi\input\consensus_4872_twoScoring_pid_c#.bin
+cog.psi.nw.maxminnorm.4872	F:\Salsa\saliya\cog\psi\input\consensus_4872_twoScoring_scoreNormalized_c#.bin
+#
+#tempest [all] cog consensus
+#nw
+cog.consensus.nw.blo.mmnorm	F:\Salsa\saliya\cog\consensus\input\nw\con_4872_nw_blo_minMaxNormalizedScore-c#.bin
+cog.consensus.nw.blo.oldnorm	F:\Salsa\saliya\cog\consensus\input\nw\con_4872_nw_blo_oldNormalizedScore-c#.bin
+cog.consensus.nw.blo.pid	F:\Salsa\saliya\cog\consensus\input\nw\con_4872_nw_blo_pid-c#.bin
+cog.consensus.nw.ps.mmnorm	F:\Salsa\saliya\cog\consensus\input\nw\con_4872_nw_ps_minMaxNormalizedScore-c#.bin
+cog.consensus.nw.ps.oldnorm	F:\Salsa\saliya\cog\consensus\input\nw\con_4872_nw_ps_oldNormalizedScore-c#.bin
+cog.consensus.nw.ps.pid	F:\Salsa\saliya\cog\consensus\input\nw\con_4872_nw_ps_pid-c#.bin
+#swg
+cog.consensus.swg.blo.mmnorm	F:\Salsa\saliya\cog\consensus\input\swg\con_4872_swg_blo_minMaxNormalizedScore-c#.bin
+cog.consensus.swg.blo.oldstarnorm	F:\Salsa\saliya\cog\consensus\input\swg\con_4872_swg_blo_newNormalizedScore-c#.bin
+cog.consensus.swg.blo.oldnorm	F:\Salsa\saliya\cog\consensus\input\swg\con_4872_swg_blo_oldNormalizedScore-c#.bin
+cog.consensus.swg.blo.pid	F:\Salsa\saliya\cog\consensus\input\swg\con_4872_swg_blo_pid-c#.bin
+#
+#
+#
+#tempest [all]
+#phy
+gbwitkrucenters.2439.nw.mmnorm	F:\Salsa\saliya\millions\phy\input\unique_2439_GbWitKruCenters_nw_mmnorm_c#.bin
+gbwitkrucenters.2439.416rc.nw.mmnorm	F:\Salsa\saliya\millions\phy\input\unique_2439_GbWitKruCenters_416RevComp_nw_mmnorm_c#.bin
+gbwitkrucenters.2439.416rc.swgms.mmnorm	F:\Salsa\saliya\millions\phy\input\swgms_unique_2439_GbWitKruCenters_416RevComp_c#.bin
+gbwitkrucenters.2439.416rc.swgms.pid	F:\Salsa\saliya\millions\phy\input\2439_swg_pid_c#.bin
+gbwitkrucenters.2439.416rc.swgms.scoreAveLocal	F:\Salsa\saliya\millions\phy\input\2439_swg_scoreAveLocal_c#.bin
+gbwitkrucenters.2439.416rc.swgms.scoreMaxGlobal	F:\Salsa\saliya\millions\phy\input\2439_swg_scoreMaxGlobal_c#.bin
+gbwitkrucenters.2439.416rc.swgms.scoreMaxLocal	F:\Salsa\saliya\millions\phy\input\2439_swg_scoreMaxLocal_c#.bin
+gbwitkrucenters.2439.416rc.swgms.scoreMinGlobal	F:\Salsa\saliya\millions\phy\input\2439_swg_scoreMinGlobal_c#.bin
+gbwitkrucenters.2439.416rc.swgms.scoreMinLocal	F:\Salsa\saliya\millions\phy\input\2439_swg_scoreMinLocal_c#.bin
+gbwitkrucenters.2133.126rc.swgms.pid	F:\Salsa\saliya\millions\phy\input\swgms_unique_2133_GbWitKruReducedCenters_126RevComp_c#.bin
+#
+4262_raxml_clustalO_Anna	F:\Salsa\saliya\millions\phy\input\4262_raxml_clustalO_Anna_int16_c#.bin
+4262_raxml_clustalO_iter10	F:\Salsa\saliya\millions\phy\input\4262_raxml_clustalO_iter10_int16_c#.bin
+4262_raxml_clustalO_iter20	F:\Salsa\saliya\millions\phy\input\4262_raxml_clustalO_iter20_int16_c#.bin
+4264_fasttree_clustalO_iter1	F:\Salsa\saliya\millions\phy\input\4264_fasttree_clustalO_iter1_int16_c#.bin
+4264_ninja_3D_distance	F:\Salsa\saliya\millions\phy\input\4264_ninja_3D_distance_int16_c#.bin
+4264_ninja_origin_distance	F:\Salsa\saliya\millions\phy\input\4264_ninja_origin_distance_int16_c#.bin
+4264_nj_3Dplot_distance	F:\Salsa\saliya\millions\phy\input\4264_nj_3Dplot_distance_int16_c#.bin
+4264_raxml_clustalO_iter1	F:\Salsa\saliya\millions\phy\input\4264_raxml_clustalO_iter1_int16_c#.bin
+4264_raxml_muscle	F:\Salsa\saliya\millions\phy\input\4264_raxml_muscle_int16_c#.bin
+#
+#tempest [cn01]
+#phy
+gbwitkrucenters.200.126rc.plus.internal.198.10d	F:\Salsa\saliya\millions\phy\input\398_10d_nj_double_c#_int16_c#.bin
+gbwitkrucenters.200.126rc.plus.internal.198.3d	F:\Salsa\saliya\millions\phy\input\398_3d_nj_double_int16_c#.bin
+#
+#
+#tempest [all]
+haixu.region.0	F:\Salsa\saliya\millions\DO_NOT_DELETE_matrices\haixu\446K\haixu_111229_r0_c#_swgms.bin
+haixu.region.2	F:\Salsa\saliya\millions\DO_NOT_DELETE_matrices\haixu\446K\haixu_114623_r2_c#_swgms.bin
+haixu.region.6	F:\Salsa\saliya\millions\DO_NOT_DELETE_matrices\haixu\446K\haixu_15452_r6_c#_swgms.bin
+haixu.100K+197	F:\Salsa\saliya\millions\haixu_100K+197\100k+197_swg_c#.bin
+haixu.100K+197.swg.normscore	F:\Salsa\saliya\millions\haixu_100K+197\100k+197_swg_distance_normscore_c#.bin
+haixu.420+123+74+100K.swg.pid.74.reversed	F:\Salsa\saliya\millions\haixu_100K+197\100617_pid_distance-c#.bin
+#
+#tempest [cn01-cn10] and [cn23-cn32]
+haixu.region.1	F:\Salsa\saliya\millions\DO_NOT_DELETE_matrices\haixu\446K\haixu_50235_r1_c#_swgms.bin
+haixu.region.3	F:\Salsa\saliya\millions\DO_NOT_DELETE_matrices\haixu\446K\haixu_42174_r3_c#_swgms.bin
+haixu.region.4	F:\Salsa\saliya\millions\DO_NOT_DELETE_matrices\haixu\446K\haixu_73885_r4_c#_swgms.bin
+haixu.region.5	F:\Salsa\saliya\millions\DO_NOT_DELETE_matrices\haixu\446K\haixu_38443_r5_c#_swgms.bin
+#
+#tempest [cn01,cn32]
+haixu.region.0.8	F:\Salsa\saliya\millions\DO_NOT_DELETE_matrices\haixu\446K\junk-tempextracts\haixu_111229_r0_c#_swgms_8.bin
+#
+#tempest [cn01]
+haixu.420.74.1291	F:\Salsa\saliya\millions\haixu_420+74+1291\1785_pid_c#.bin
+haixu.420.74.1291_extract_420pts	F:\Salsa\saliya\millions\haixu_420+74+1291\1785_pid_c#_420pts.bin
+haixu.420.74.1291.new	F:\Salsa\saliya\millions\haixu_420+74+1291\1785_pid_debug_c#.bin
+haixu.420.74.1291.new_extract_420pts	F:\Salsa\saliya\millions\haixu_420+74+1291\1785_pid_debug_c#_420pts.bin
+haixu.420.74.1291.normalized	F:\Salsa\saliya\millions\haixu_420+74+1291\1785_normalizedScore_debug_c#.bin
+haixu.420.74.1291.normalized.420	F:\Salsa\saliya\millions\haixu_420+74+1291\1785_normalizedScore_debug_c#_420pts.bin
+haixu.420+123+74+100K.swg.pid.74.reversed_extract_420pts	F:\Salsa\saliya\millions\haixu_100K+197\100617_pid_distance-c#_420pts.bin
+#
+haixu.420.74.1291.123.pid	F:\yangruan\matrix\haixu\1291+74+123+420\1908_pid_c#.bin
+haixu.420.74.1291.123.normalized	F:\yangruan\matrix\haixu\1291+74+123+420\1908_normalizedScore_c#.bin
+#
+#
+#
+#tempest[all] - New Fungi Regions
+tempest.r0.pid.125798	F:\Salsa\saliya\millions\fungi_rerun\regions\region0_125798_pidC#.bin
+tempest.r1.pid.47039	F:\Salsa\saliya\millions\fungi_rerun\regions\region1_47039_pidC#.bin
+tempest.r2.pid.124209	F:\Salsa\saliya\millions\fungi_rerun\regions\region2_124209_pidC#.bin
+tempest.r3.pid.39212	F:\Salsa\saliya\millions\fungi_rerun\regions\region3_39212_pidC#.bin
+tempest.r4.pid.34761	F:\Salsa\saliya\millions\fungi_rerun\regions\region4_34761_pidC#.bin
+tempest.r5.pid.41870	F:\Salsa\saliya\millions\fungi_rerun\regions\region5_41870_pidC#.bin
+tempest.r6.pid.22712	F:\Salsa\saliya\millions\fungi_rerun\regions\region6_22712_pidC#.bin
+tempest.r7.pid.10440	F:\Salsa\saliya\millions\fungi_rerun\regions\region7_10440_pidC#.bin
+tempest.rrna.r9.54760	F:\Salsa\saliya\millions\fungi_rerun\regions\mina_54760_r9_c#_swgms.bin
+#
+#tempest[2-32] - New Fungi Regions - Recluster L1
+t.pid.r1(4).{0+2+3}	F:\Salsa\saliya\millions\fungi_rerun\regions\reclus\region1_47039_pidC#_0.bin
+t.pid.r3(15).0	F:\Salsa\saliya\millions\fungi_rerun\regions\reclus\region3_39212_pidC#_0.bin
+t.pid.r3(15).10	F:\Salsa\saliya\millions\fungi_rerun\regions\reclus\region3_39212_pidC#_10.bin
+t.pid.r3(15).14	F:\Salsa\saliya\millions\fungi_rerun\regions\reclus\region3_39212_pidC#_14.bin
+t.pid.r3(15).2	F:\Salsa\saliya\millions\fungi_rerun\regions\reclus\region3_39212_pidC#_2.bin
+t.pid.r3(15).3	F:\Salsa\saliya\millions\fungi_rerun\regions\reclus\region3_39212_pidC#_3.bin
+t.pid.r3(15).4	F:\Salsa\saliya\millions\fungi_rerun\regions\reclus\region3_39212_pidC#_4.bin
+t.pid.r3(15).5	F:\Salsa\saliya\millions\fungi_rerun\regions\reclus\region3_39212_pidC#_5.bin
+
+#
+#tempest[2-32] - New Fungi Regions - Recluster L2
+t.pid.r0(19).13	F:\Salsa\saliya\millions\fungi_rerun\regions\reclus\reclus\region0_125798_pidC#_13.bin
+t.pid.r4(12).0	F:\Salsa\saliya\millions\fungi_rerun\regions\reclus\reclus\region4_34761_pidC#_0.bin
+t.pid.r4(12).2	F:\Salsa\saliya\millions\fungi_rerun\regions\reclus\reclus\region4_34761_pidC#_2.bin
+t.pid.r4(12).3	F:\Salsa\saliya\millions\fungi_rerun\regions\reclus\reclus\region4_34761_pidC#_3.bin
+t.pid.r4(12).4	F:\Salsa\saliya\millions\fungi_rerun\regions\reclus\reclus\region4_34761_pidC#_4.bin
+t.pid.r4(12).7	F:\Salsa\saliya\millions\fungi_rerun\regions\reclus\reclus\region4_34761_pidC#_7.bin
+t.pid.r4(12).8	F:\Salsa\saliya\millions\fungi_rerun\regions\reclus\reclus\region4_34761_pidC#_8.bin
+t.pid.r5(26).15	F:\Salsa\saliya\millions\fungi_rerun\regions\reclus\reclus\region5_41870_pidC#_15.bin
+t.pid.r5(26).8	F:\Salsa\saliya\millions\fungi_rerun\regions\reclus\reclus\region5_41870_pidC#_8.bin
+t.pid.r5(26).9	F:\Salsa\saliya\millions\fungi_rerun\regions\reclus\reclus\region5_41870_pidC#_9.bin
+t.pid.r7(9).{3+6}	F:\Salsa\saliya\millions\fungi_rerun\regions\reclus\reclus\region7_10440_pidC#_3.bin
+#
+#tempest[all] - lsu_k+w phy
+AMF_Phylo_for_clustering_revised_599nts_set_unique_PIDNG_StrictDNAdist	F:\Salsa\saliya\millions\phy\lsu_k+w\AMF_Phylo_for_clustering_revised_599nts_set_unique_PIDNG_StrictDNAdist_c#.bin
+AMF_Phylo_for_clustering_revised_599nts_set_unique_SWGPID	F:\Salsa\saliya\millions\phy\lsu_k+w\AMF_Phylo_for_clustering_revised_599nts_set_unique_seqs_c#.bin
+AMF_Phylo_454OptimizedLength_with_Haixu_Wittaya_454_clusters_trimToBackboneSeqLength_msa_pidng_1020	F:\Salsa\saliya\millions\phy\lsu_k+w\AMF_Phylo_454OptimizedLength_with_Haixu_Wittaya_454_clusters_trimToBackboneSeqLength_PIDNG_StrictDNAdist.bin
+AMF_Phylo_454OptimizedLength_with_Haixu_Wittaya_454_clusters_trimToBackboneSeqLength_nw_1020	F:\Salsa\saliya\millions\phy\lsu_k+w\AMF_Phylo_454OptimizedLength_with_Haixu_Wittaya_454_clusters_trimToBackboneSeqLength_nw_c#.bin
+AMF_Phylo_454OptimizedLength_with_Haixu_Wittaya_454_clusters_trimToBackboneSeqLength_swgms_1020	F:\Salsa\saliya\millions\phy\lsu_k+w\AMF_Phylo_454OptimizedLength_with_Haixu_Wittaya_454_clusters_trimToBackboneSeqLength_swgms_c#.bin
+AMF_Phylo_Seqs_999Nts_nw_c#_1306	F:\Salsa\saliya\millions\phy\lsu_k+w\AMF_Phylo_Seqs_999Nts_nw_c#.bin
+#
+#tempest[2-11]+[13-32] - lsu_k+w phy
+AMF_Phylo_Seqs_999Nts_Apr17MAFFT_seqs_swgms_pid_1306	F:\Salsa\saliya\millions\phy\lsu_k+w\AMF_Phylo_Seqs_999Nts_Apr17MAFFT_seqs_swgms_pid_1306_c#.bin
+AMF_Phylo_Seqs_599Nts_Apr17MAFFT_seqs_swgms_pid_1821	F:\Salsa\saliya\millions\phy\lsu_k+w\AMF_Phylo_Seqs_599Nts_Apr17MAFFT_seqs_swgms_pid_1821_c#.bin
+AMF_Phylo_Seqs_599Nts_Apr17MAFFT_seqs_msa_strict_pidng_1821	F:\Salsa\saliya\millions\phy\lsu_k+w\AMF_Phylo_Seqs_599Nts_Apr17MAFFT_PIDNG_StrictDNAdist.bin
+AMF_Phylo_Seqs_999Nts_Apr17MAFFT_seqs_msa_strict_pidng_1306	F:\Salsa\saliya\millions\phy\lsu_k+w\AMF_Phylo_Seqs_999Nts_Apr17MAFFT_PIDNG_StrictDNAdist.bin
+99centers_plus_AMF_Phylo_Seqs_599Nts_Apr17MAFFT_seqs_swgms_pid_1920	F:\Salsa\saliya\millions\phy\lsu_k+w\99centers_plus_AMF_Phylo_Seqs_599Nts_Apr17MAFFT_seqs_swgms_pid_1920_c#.bin
+99centers_plus_AMF_Phylo_Seqs_999Nts_Apr17MAFFT_seqs_swgms_pid_1405	F:\Salsa\saliya\millions\phy\lsu_k+w\99centers_plus_AMF_Phylo_Seqs_999Nts_Apr17MAFFT_seqs_swgms_pid_1405_c#.bin
+reversed99centers_plus_AMF_Phylo_Seqs_599Nts_Apr17MAFFT_seqs_swgms_pid_1920	F:\Salsa\saliya\millions\phy\lsu_k+w\reversed99centers_plus_AMF_Phylo_Seqs_599Nts_Apr17MAFFT_seqs_swgms_pid_1920_c#.bin
+reversed99centers_plus_AMF_Phylo_Seqs_999Nts_Apr17MAFFT_seqs_swgms_pid_1405	F:\Salsa\saliya\millions\phy\lsu_k+w\reversed99centers_plus_AMF_Phylo_Seqs_999Nts_Apr17MAFFT_seqs_swgms_pid_1405_c#.bin
+#
+#tempest[all] - larry
+unique_14150_rnafragments_all	F:\Salsa\saliya\larry\input\unique_14150_rnafragments_all_C#.bin
+#
+#tempest[1,3..32]
+MasterPlusR1.swg.pid	F:\Salsa\saliya\millions\gsf\input\101020_r1_pid-c#.bin
+MasterPlusRevR2.swg.pid	F:\Salsa\saliya\millions\gsf\input\101020_r2_pid-c#.bin
+#tempest[1..23,25..32]
+MasterPlusRevR2.vfscaled1.5.swg.pid	F:\Salsa\saliya\millions\gsf\input\101020_r2_pid_partS1.5-c#.bin
+#
+#madrid[all] - New Fungi Regions
+madrid.r6.pid.22712	C:\salsa\saliya\millions\fungi_rerun\regions\r6_pid-c#.bin
+madrid.r7.pid.10440	C:\salsa\saliya\millions\fungi_rerun\regions\r7_pid-c#.bin
+#
+#madrid[all] - New Fungi Regions - Recluster
+madrid.r0.pid.125798_4_2561	C:\Salsa\saliya\millions\fungi_rerun\regions\reclus\region0_125798_pidC#_4.bin
+madrid.r0.pid.125798_6_4788	C:\Salsa\saliya\millions\fungi_rerun\regions\reclus\region0_125798_pidC#_6.bin
+madrid.r0.pid.125798_9_4544	C:\Salsa\saliya\millions\fungi_rerun\regions\reclus\region0_125798_pidC#_9.bin
+#
+#madrid[all] - PWC Center Finding
+fungi.old.r6.15452	c:\remote\input\haixu_region_6_15452.bin
+fungi.old.r6.15452.pts	C:\remote\input\refined_fungi_6(15)_zeroidx.txt
+fungi.old.r6.15452.index	C:\remote\input\haixu_region_6_index.txt
+#
+#tempest[all] - csharptojava input
+region5_41870_pidC#_2_12579	C:\Salsa\saliya\csharptojava\pwc\input\region5_41870_pidC#_2_12579.bin
+region5_41870_pidC#	C:\Salsa\saliya\csharptojava\pwc\input\region5_41870_pidC#.bin
+region5_41870_pidC#_10k	C:\Salsa\saliya\csharptojava\pwc\input\region5_41870_pidC#_10k.bin
+region5_41870_pidC#_20k	C:\Salsa\saliya\csharptojava\pwc\input\region5_41870_pidC#_20k.bin
+region5_41870_pidC#_30k	C:\Salsa\saliya\csharptojava\pwc\input\region5_41870_pidC#_30k.bin
+region5_41870_pidC#_40k	C:\Salsa\saliya\csharptojava\pwc\input\region5_41870_pidC#_40k.bin

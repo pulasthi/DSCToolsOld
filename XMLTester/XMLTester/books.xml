@@ -1,0 +1,7 @@
+<books>
+  <A property="a">
+    <B>text</B>
+    <C>textg</C>
+    <D>99999</D>
+  </A>
+</books>
