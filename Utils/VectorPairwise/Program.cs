@@ -23,7 +23,6 @@ namespace VectorPairwise
         static void Main(string[] args)
         {
             // Load the command line args into our helper class which allows us to name arguments
-            Console.WriteLine("Debug: Came to main");
             Arguments pargs = new Arguments(args)
             {
                 Usage = "Usage: VectorPairwise.exe /config=<string>"
@@ -34,11 +33,9 @@ namespace VectorPairwise
                 Console.WriteLine(pargs.Usage);
                 return;
             }
-            Console.WriteLine("Debug: Came before using MPI");
             using (new MPI.Environment(ref args))
             {
                 ReadConfiguration(pargs);
-                Console.WriteLine("Debug: Rank " + Communicator.world.Rank + " read configuration");
                 IList<VectorPoint> vecs = ReadVectors();
                 _size = vecs.Count;
 
@@ -51,12 +48,12 @@ namespace VectorPairwise
                 PartialMatrix<double> myRowStrip =
                     new PartialMatrix<double>(myColumnBlocks[0].RowRange, new Range(0, _size - 1));
 
-                Console.WriteLine("Debug: Rank " + Communicator.world.Rank + " done with data structures");
 
                 ComputeDistanceBlocks(myRowStrip, myColumnBlocks, vecs);
-                Console.WriteLine("Debug: Rank " + Communicator.world.Rank + " done with block computation");
                 _dmin = Communicator.world.Allreduce(_dmin, Operation<double>.Min);
                 _dmax = Communicator.world.Allreduce(_dmax, Operation<double>.Max);
+
+                if (_dmax < 1) _normalize = false; // no need to normalize whe max distance is also less than 1
 
                 if (rank == 0)
                 {
@@ -64,7 +61,6 @@ namespace VectorPairwise
                     Console.WriteLine("Max distance: " + _dmax);
                 }
 
-                Console.WriteLine("Debug: Rank " + Communicator.world.Rank + " just before WriteFullMatrixOnRank0");
                 WriteFullMatrixOnRank0(_distFile, _size, rank, myRowStrip, myColumnBlocks[0].RowRange, processToCloumnBlocks[0][0].RowRange, _normalize, _dmax);
                 MPI.Communicator.world.Barrier();
                 if (rank ==0)
