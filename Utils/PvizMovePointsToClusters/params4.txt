@@ -1,0 +1,75 @@
+﻿0
+Scu.cal
+
+1
+Cla.cla	IN	AZ
+Ent.inf	CA	IN	AZ
+Cla.lut
+Cla.etu
+Cla.spe
+
+2
+Amb.app	NC	JA
+Amb.fen
+
+3
+Rhi.irr
+Cla.cla	IN
+Rhi.spe
+
+4
+Rac.ful	IN
+Scu.pel
+Ent.inf	IN
+Scu.gil
+Rac.ful
+
+5
+Fun.mos
+Fun.cor
+FUN.GEO
+Pac.sci
+SEP.CON
+
+6
+Aca.col
+Pac.sci
+Par.occ	CA	NC
+Div.spu
+Div.epi
+Div.cel
+Aca.lae
+Arc.tra
+Div.aur
+Div.ebu
+Div.spe
+Aca.ken
+PAR.MAJ
+ENT.INF
+Aca.bra
+
+7
+Sep.con
+
+8
+Scu.het
+Scu.ery
+Gig.gig
+Gig.ros
+Gig.mar
+ENT.INF
+
+9
+Rhi.cla
+RHI.IRR
+
+10
+Rhi.irr
+Cla.cla	IN
+
+11
+Rhi.int
+Rhi.cla
+Rhi.irr
+Glo.mac
+Rhi.pro

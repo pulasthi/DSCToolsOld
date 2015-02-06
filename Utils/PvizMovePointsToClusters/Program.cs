@@ -14,10 +14,10 @@ namespace PvizMovePointsToClusters
         static void Main(string[] args)
         {
             var plotFile =
-                @"G:\Box Sync\SalsaBio\millions\phy\updated_10.2.14\MDS\WDA_SMACOF\updated_10.2.14_wdasmacof.pviz";
+                @"E:\Sali\InCloud\IUBox\Box Sync\SalsaBio\millions\phy\updated_10.2.14\MDS\WDA_SMACOF\updated_10.2.14_wdasmacof.pviz";
             var updatedPlotFile =
-                @"G:\Box Sync\SalsaBio\millions\phy\updated_10.2.14\MDS\WDA_SMACOF\updated_10.2.14_wdasmacof_by_species.pviz";
-            var paramsFile = @"C:\Sali\pti\sub\salsa\Saliya\c#\Utils\PvizMovePointsToClusters\params3.txt";
+                @"E:\Sali\InCloud\IUBox\Box Sync\SalsaBio\millions\phy\updated_10.2.14\MDS\WDA_SMACOF\updated_10.2.14_wdasmacof_by_species_gt_10.pviz";
+            var paramsFile = @"E:\Sali\git\github\DSCToolsOld\Utils\PvizMovePointsToClusters\params4.txt";
 
             var plot = PvizModel.LoadPviz(plotFile);
             var clusters = plot.Clusters;
@@ -31,10 +31,6 @@ namespace PvizMovePointsToClusters
             foreach (var cluster in clusters)
             {
                 var cnum = cluster.Key;
-                if (cnum == 5)
-                {
-                    Console.WriteLine("debug");
-                }
                 cluster.Key = updatedClusterNumbers[cnum];
                 cluster.Label = cnum.ToString(CultureInfo.InvariantCulture);
                 if (!clustersToAlter.Contains(cnum)) continue;
@@ -54,9 +50,9 @@ namespace PvizMovePointsToClusters
             var points = plot.Points;
             foreach (var point in points)
             {
-                if (point.Key == 1596)
+                if (point.Key == 1684)
                 {
-                    Console.WriteLine("Debug");
+                    Console.WriteLine("alright let's debug");
                 }
                 var cnum = point.ClusterKey;
                 point.ClusterKey = updatedClusterNumbers[cnum];
@@ -66,7 +62,7 @@ namespace PvizMovePointsToClusters
                 foreach (var s in species)
                 {
                     var speciesName = s[0].ToUpper();
-                    if (!label.Contains(speciesName) && !label.Contains(speciesName.Replace('_','.'))) continue;
+                    if (!label.Contains(speciesName) && !label.Contains(speciesName.Replace('_','.')) && !label.Contains(speciesName.Replace('.','_'))) continue;
                     if (s.Length > 2 && !label.Contains("("+s[1].ToUpper()+")")) continue;
                     var moveToCluster = int.Parse(s[s.Length - 1]);
                     point.ClusterKey = moveToCluster;

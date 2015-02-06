@@ -19,11 +19,11 @@ namespace PvizMovePointsToAbundantOTUClusters
             var paramsFile = @"C:\Sali\pti\sub\salsa\Saliya\c#\Utils\PvizMovePointsToAbundantOTUClusters\Params.txt";*/
 
             var plotFile =
-                @"G:\Box Sync\SalsaBio\millions\phy\updated_10.2.14\MDS\WDA_SMACOF\updated_10.2.14_wdasmacof.pviz";
-            var paramsFile = @"C:\Sali\pti\sub\salsa\Saliya\c#\Utils\PvizMovePointsToAbundantOTUClusters\updated_10.2.14_MDSCluster_UPARSE_97PercClusterMatch.txt";
-            var title = @"updated_10.2.14_MDSCluster_UPARSE_97Perc";
+                @"E:\Sali\InCloud\IUBox\Box Sync\SalsaBio\millions\phy\updated_10.2.14\MDS\WDA_SMACOF\updated_10.2.14_wdasmacof.pviz";
+            var paramsFile = @"E:\Sali\git\github\DSCToolsOld\Utils\PvizMovePointsToAbundantOTUClusters\MDS_Cluster_AbundantOTU_Cluster_Map_97Perc_RevisedCluster_Pviz_File.txt";
+            var title = @"updated_10.2.14_wdasmacof_by_abundant_otu_new";
             var updatedPlotFile =
-                @"G:\Box Sync\SalsaBio\millions\phy\updated_10.2.14\MDS\WDA_SMACOF\" + title + ".pviz";
+                @"E:\Sali\InCloud\IUBox\Box Sync\SalsaBio\millions\phy\updated_10.2.14\MDS\WDA_SMACOF\" + title + ".pviz";
             
 
             var plot = PvizModel.LoadPviz(plotFile);
