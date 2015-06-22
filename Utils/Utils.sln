@@ -285,6 +285,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiSeq16sSampleSelector", "M
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SequenceOverlapSep", "SequenceOverlapSep\SequenceOverlapSep.csproj", "{5D7FE31A-BA03-4168-BD09-81656F6AD7D8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TmpFilterChinaHealthVectors", "TmpFilterChinaHealthVectors\TmpFilterChinaHealthVectors.csproj", "{0FE66EAC-641B-44F9-B477-D2AE089222FC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -1787,6 +1789,18 @@ Global
 		{5D7FE31A-BA03-4168-BD09-81656F6AD7D8}.Release|Mixed Platforms.Build.0 = Release|x86
 		{5D7FE31A-BA03-4168-BD09-81656F6AD7D8}.Release|x64.ActiveCfg = Release|Any CPU
 		{5D7FE31A-BA03-4168-BD09-81656F6AD7D8}.Release|x86.ActiveCfg = Release|Any CPU
+		{0FE66EAC-641B-44F9-B477-D2AE089222FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0FE66EAC-641B-44F9-B477-D2AE089222FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0FE66EAC-641B-44F9-B477-D2AE089222FC}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{0FE66EAC-641B-44F9-B477-D2AE089222FC}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{0FE66EAC-641B-44F9-B477-D2AE089222FC}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{0FE66EAC-641B-44F9-B477-D2AE089222FC}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{0FE66EAC-641B-44F9-B477-D2AE089222FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0FE66EAC-641B-44F9-B477-D2AE089222FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0FE66EAC-641B-44F9-B477-D2AE089222FC}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{0FE66EAC-641B-44F9-B477-D2AE089222FC}.Release|Mixed Platforms.Build.0 = Release|x86
+		{0FE66EAC-641B-44F9-B477-D2AE089222FC}.Release|x64.ActiveCfg = Release|Any CPU
+		{0FE66EAC-641B-44F9-B477-D2AE089222FC}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

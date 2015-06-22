@@ -9,11 +9,17 @@ namespace Common
     {
         private double[] _vec;
         private int _length;
+        private string _name;
 
         public VectorPoint(double[] vec)
         {
             _vec = vec;
             _length = vec.Count();
+        }
+
+        public VectorPoint(double[] vec, string name) : this(vec)
+        {
+            _name = name;
         }
 
         public double[] Vec
@@ -24,6 +30,19 @@ namespace Common
         public int Length
         {
             get { return _length; }
+        }
+
+        public string Name
+        {
+            get { return _name; }
+        }
+
+        public int NonZerComponentCount
+        {
+            get
+            {
+                return _vec.Count(t => t != 0.0);
+            }
         }
 
 
