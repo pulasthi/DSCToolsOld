@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="alreadydonepartitions.txt" />
+    <Content Include="AnnaBioJoined.txt" />
     <Content Include="artificialpartition.txt" />
     <Content Include="artificialpartition2.txt" />
     <Content Include="artificialpartition3.txt" />
@@ -65,6 +66,7 @@
     <Content Include="artificialpartition6.txt" />
     <Content Include="collateclustershaixumillionsagain.txt" />
     <Content Include="collateclustershaixumillionsagain2.txt" />
+    <Content Include="AnnaBio.txt" />
     <Content Include="phy.updated_6.5.14.txt" />
     <Content Include="NewFungiCollateClustersClean.txt" />
     <Content Include="NewFungiCollateClustersL2.txt" />

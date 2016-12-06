@@ -1,0 +1,24 @@
+﻿pointsDir	C:\Users\Pulasthi\OneDrive\IUWork\LabWork\bio\2nd_round
+pointFilePattern originalwithclusters.txt
+clustersDir	C:\Users\Pulasthi\OneDrive\IUWork\LabWork\bio\2nd_round
+clusterDirpattern	cluster{2}
+clusterFilePattern	1x24x24.2.g.perf.24n.cluster-M{0}-C{1}txt
+outDir	C:\Users\Pulasthi\OneDrive\IUWork\LabWork\bio\2nd_round\summed
+outFilePattern	Ann_{0}({1})_to_{2}({3})_zeroidx.txt
+outPlotFilePattern	artificial_{0}({1})_to_{2}({3})_zeroidx.pviz
+outLablesFilePattern	artificial_{0}({1})_to_{2}({3})_zeroidx_labels.txt
+outsepereateFilesPattern	cluster{0}_sperated.txt
+
+C	1
+N	8
+join	none
+labelsFile	none
+x	y	n
+0	3	3
+1	4	4
+2	11	11
+3	9	9
+4	6	6
+5	20	20
+6	8	8
+7	2	2

@@ -47,6 +47,7 @@ namespace CollateClusters
                 string outFilePattern = partitionReader.ReadLine().Trim().Split(sep)[1];
                 string outPlotFilePattern = partitionReader.ReadLine().Trim().Split(sep)[1];
                 string outLabelsFilePattern = partitionReader.ReadLine().Trim().Split(sep)[1];
+                string sepereateFilesPattern = partitionReader.ReadLine().Trim().Split(sep)[1];
 
                 string line;
                 while (!partitionReader.EndOfStream)
@@ -55,7 +56,7 @@ namespace CollateClusters
                     if (!string.IsNullOrEmpty(line) && line.StartsWith("C"))
                     {
                         CollateRegion(int.Parse(line.Trim().Split(sep)[1]), partitionReader, pointsDir, pointFilePattern,
-                                      clustersDir, clusterDirPattern, clusterFilePattern, outDir, outFilePattern, outPlotFilePattern, outLabelsFilePattern, sep);
+                                      clustersDir, clusterDirPattern, clusterFilePattern, outDir, outFilePattern, outPlotFilePattern, outLabelsFilePattern, sepereateFilesPattern, sep);
                     }
                 }
             }
@@ -98,7 +99,7 @@ namespace CollateClusters
         static void CollateRegion(int C, StreamReader reader,
             string pointsDir, string pointFilePattern, 
             string clusterDir, string clusterDirPattern, string clusterFilePattern, 
-            string outDir, string outFilePattern, string outPlotFilePattern, string outLabelsPattern, char[] sep)
+            string outDir, string outFilePattern, string outPlotFilePattern, string outLabelsPattern, string outSeperateFilePattern, char[] sep)
         {
             string readLine = reader.ReadLine();
             int N = int.Parse(readLine.Trim().Split(sep)[1]);
@@ -184,13 +185,21 @@ namespace CollateClusters
             }
 
             string clusterFile;
+            string clusterOutFile;
             Hashtable clusterReaders = new Hashtable(xyntable.Count);
+            Hashtable clusterWriters = new Hashtable(xyntable.Count);
+
             foreach (int[] arr in xyntable.Values)
             {
                 clusterFile = Path.Combine(clusterDir, C.ToString(),
                                            string.Format(clusterDirPattern, C, N, arr[0], arr[1]),
                                            string.Format(clusterFilePattern, arr[1], arr[2]));
+                clusterOutFile = Path.Combine(clusterDir, C.ToString(),
+                                           string.Format(clusterDirPattern, C, N, arr[0], arr[1]),
+                                           string.Format(outSeperateFilePattern, arr[0]));
+                clusterWriters.Add(arr[0], new StreamWriter(clusterOutFile));
                 clusterReaders.Add(arr[0], new StreamReader(clusterFile));
+
             }
 
             Hashtable startTable = new Hashtable(N);
@@ -229,8 +238,9 @@ namespace CollateClusters
                 using (StreamWriter outTxtWriter = new StreamWriter(outTxtFile), outLabelsWriter = new StreamWriter(outLabelsFile))
                 {
                     string[] splits;
-                    int x, outX, subClusterNumber;
+                    int x, outX, subClusterNumber, subIndex;
                     string outLabel;
+                    string line;
                     Hashtable outLabelsTable = new Hashtable(outN);
                     while (!ptsFileReader.EndOfStream)
                     {
@@ -238,17 +248,25 @@ namespace CollateClusters
                         x = int.Parse(splits[4]);
                         x = joinedTable.Contains(x) ? (int)joinedTable[x] : x;
                         outX = ((int) startTable[x]);
-                        subClusterNumber = (clusterReaders.ContainsKey(x)
+                        line = (clusterReaders.ContainsKey(x)
+                                                ? ((StreamReader)clusterReaders[x]).ReadLine() : null);
+                        subClusterNumber = (line != null
                                                 ? (int.Parse(
-                                                    ((StreamReader) clusterReaders[x]).ReadLine().Trim().Split(sep)[1]) -
+                                                    line.Trim().Split(sep)[1]) -
+                                                   ClusterIndexBase) // ClusterIndexBase = 1 if PWC outputs 1 based indices or zero otherwise
+                                                : 0);
+                        subIndex = (line != null
+                                                ? (int.Parse(
+                                                    line.Trim().Split(sep)[0]) -
                                                    ClusterIndexBase) // ClusterIndexBase = 1 if PWC outputs 1 based indices or zero otherwise
                                                 : 0);
                         outX += subClusterNumber;
                         outTxtWriter.WriteLine(splits[0] + "\t" + splits[1] + "\t" + splits[2] + "\t" + splits[3] + "\t" +
                                                outX);
 
+                        ((StreamWriter)clusterWriters[x]).WriteLine(subIndex + "\t" + splits[1] + "\t" + splits[2] + "\t" + splits[3] + "\t" + subClusterNumber + "\t" + subClusterNumber);
                         // Add point element
-                        points.Add(CreatePointElement(int.Parse(splits[0]), outX, splits[0], double.Parse(splits[1]),
+                        points.Add(CreatePointElement(int.Parse(splits[0]), outX, outX.ToString(), double.Parse(splits[1]),
                                                       double.Parse(splits[2]), double.Parse(splits[3])));
 
                         outLabel = ((string) labelsTable[x]);
@@ -274,6 +292,12 @@ namespace CollateClusters
 
                     plotviz.Save(outPlotFile);
                 }
+            }
+
+            //Close cluster writers
+            foreach (int[] arr in xyntable.Values)
+            {
+                ((StreamWriter)clusterWriters[arr[0]]).Close();
             }
 
             // Close cluster readers
