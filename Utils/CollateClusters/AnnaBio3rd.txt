@@ -1,0 +1,57 @@
+﻿pointsDir	C:\Users\Pulasthi\OneDrive\IUWork\LabWork\bio\2nd_round\3rdround\results
+pointFilePattern	cluster{0}_sperated.txt
+clustersDir	C:\Users\Pulasthi\OneDrive\IUWork\LabWork\bio\2nd_round\3rdround\results
+clusterDirpattern	{2}
+clusterFilePattern	cluster-M{0}-C{1}txt
+outDir	C:\Users\Pulasthi\OneDrive\IUWork\LabWork\bio\2nd_round\3rdround\results
+outFilePattern	cluter{0}_gathered.txt
+outPlotFilePattern	artificial_{0}({1})_to_{2}({3})_zeroidx.pviz
+outLablesFilePattern	artificial_{0}({1})_to_{2}({3})_zeroidx_labels.txt
+outsepereateFilesPattern	3cluster{0}_sperated.txt
+
+C	0
+N	3
+join	none
+labelsFile	none
+x	y	n
+1	4	4
+2	2	2
+
+C	2
+N	9
+join	none
+labelsFile	none
+x	y	n
+3	2	2
+
+C	3
+N	8
+join	none
+labelsFile	none
+x	y	n
+6	4	4
+
+C	4
+N	3
+join	none
+labelsFile	none
+x	y	n
+0	2	2
+1	2	2
+
+C	5
+N	8
+join	none
+labelsFile	none
+x	y	n
+0	4	4
+2	2	2
+5	5	5
+6	4	4
+
+C	7
+N	2
+join	none
+labelsFile	none
+x	y	n
+1	3	3

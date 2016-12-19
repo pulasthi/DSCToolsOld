@@ -220,6 +220,11 @@ namespace CollateClusters
 
             int outN = lastStart + (xyntable.ContainsKey(lastStartIdx) ? ((int[]) xyntable[lastStartIdx])[2] : 1);
 
+            //string ptsFile = Path.Combine(pointsDir, C.ToString(), string.Format(pointFilePattern, C));
+            //string outTxtFile = Path.Combine(outDir, C.ToString(), string.Format(outFilePattern, C, N, C, outN));
+            //string outPlotFile = Path.Combine(outDir, C.ToString(), string.Format(outPlotFilePattern, C, N, C, outN));
+            //string outLabelsFile = Path.Combine(outDir, C.ToString(), string.Format(outLabelsPattern, C, N, C, outN));
+
             string ptsFile = Path.Combine(pointsDir, string.Format(pointFilePattern, C));
             string outTxtFile = Path.Combine(outDir, string.Format(outFilePattern, C, N, C, outN));
             string outPlotFile = Path.Combine(outDir, string.Format(outPlotFilePattern, C, N, C, outN));
@@ -261,10 +266,9 @@ namespace CollateClusters
                                                    ClusterIndexBase) // ClusterIndexBase = 1 if PWC outputs 1 based indices or zero otherwise
                                                 : 0);
                         outX += subClusterNumber;
-                        outTxtWriter.WriteLine(splits[0] + "\t" + splits[1] + "\t" + splits[2] + "\t" + splits[3] + "\t" +
-                                               outX);
+                        outTxtWriter.WriteLine(splits[0] + "\t" + outX);
 
-                        ((StreamWriter)clusterWriters[x]).WriteLine(subIndex + "\t" + splits[1] + "\t" + splits[2] + "\t" + splits[3] + "\t" + subClusterNumber + "\t" + subClusterNumber);
+                        //((StreamWriter)clusterWriters[x]).WriteLine(subIndex + "\t" + splits[1] + "\t" + splits[2] + "\t" + splits[3] + "\t" + subClusterNumber + "\t" + subClusterNumber);
                         // Add point element
                         points.Add(CreatePointElement(int.Parse(splits[0]), outX, outX.ToString(), double.Parse(splits[1]),
                                                       double.Parse(splits[2]), double.Parse(splits[3])));
@@ -295,10 +299,10 @@ namespace CollateClusters
             }
 
             //Close cluster writers
-            foreach (int[] arr in xyntable.Values)
-            {
-                ((StreamWriter)clusterWriters[arr[0]]).Close();
-            }
+           // foreach (int[] arr in xyntable.Values)
+         //   {
+         //       ((StreamWriter)clusterWriters[arr[0]]).Close();
+         //   }
 
             // Close cluster readers
             foreach (int[] arr in xyntable.Values)
@@ -309,13 +313,13 @@ namespace CollateClusters
                 var clusterReader = ((StreamReader) clusterReaders[arr[0]]);
                 if (!clusterReader.EndOfStream)
                 {
-                    if (File.Exists(outTxtFile)) File.Delete(outTxtFile);
+                  //  if (File.Exists(outTxtFile)) File.Delete(outTxtFile);
                     string remaining = string.Empty;
                     while (!clusterReader.EndOfStream)
                     {
                         remaining += clusterReader.ReadLine();
                     }
-                    throw new Exception("Unfinished stream for file: " + clusterFile +"\n" + remaining);
+                  //  throw new Exception("Unfinished stream for file: " + clusterFile +"\n" + remaining);
                 }
             }
         }

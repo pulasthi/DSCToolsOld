@@ -57,6 +57,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="alreadydonepartitions.txt" />
+    <Content Include="AnnaBio3rdfull.txt" />
+    <Content Include="AnnaBio3rd.txt" />
     <Content Include="AnnaBioJoined.txt" />
     <Content Include="artificialpartition.txt" />
     <Content Include="artificialpartition2.txt" />

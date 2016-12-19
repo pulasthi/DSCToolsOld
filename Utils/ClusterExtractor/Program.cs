@@ -14,11 +14,35 @@ namespace ClusterExtractor
          * -- Cluster file should be sorted by point number
          * -- Extracts matrix in the order of point numbers for each clusters
          **********************************************************************/
+        private static string configTemplateFile = "C:\\Users\\Pulasthi\\Documents\\GitHub\\DSCToolsOld\\Utils\\ClusterExtractor\\config.properties.template";
+        private static string runLine;
         static void Main(string[] args)
         {
-            
+            string clusterFile;
+            string distFile;
+            string outDir;
+            int bigc;
+            int dataType;
+            bool isJava;
+            int consensus;
+            string clustersLine;
+            string newClustersLine;
+            using (StreamReader partitionReader = new StreamReader(args[0]))
+            {
+                char[] sep = new[] {' ','\t'};
+                clusterFile = partitionReader.ReadLine().Trim().Split(sep)[1];
+                distFile = partitionReader.ReadLine().Trim().Split(sep)[1];
+                outDir = partitionReader.ReadLine().Trim().Split(sep)[1];
+                bigc = Int32.Parse(partitionReader.ReadLine().Trim().Split(sep)[1]);
+                dataType = Int32.Parse(partitionReader.ReadLine().Trim().Split(sep)[1]);
+                clustersLine = partitionReader.ReadLine().Trim().Split(sep)[1];
+                newClustersLine = partitionReader.ReadLine().Trim().Split(sep)[1];
+                consensus = Int32.Parse(partitionReader.ReadLine().Trim().Split(sep)[1]);
+                isJava = Convert.ToBoolean(partitionReader.ReadLine().Trim().Split(sep)[1]);
+                runLine = partitionReader.ReadLine().Trim().Split('\t')[1];
+            }
             //Load the command line args into our helper class which allows us to name arguments
-            Arguments pargs = new Arguments(args);
+           /* Arguments pargs = new Arguments(args);
             // dataType {0=int16, 1=uint16, 2=double}
             pargs.Usage = "Usage: ClusterExtractor.exe /clusterFile=<string> /distFile=<string> /outDir=<string>" +
                           "/bigc=<int> /dataType=<int> /clusters=<string> /consensus=<int>\n /isJava=<bool>" +
@@ -30,23 +54,30 @@ namespace ClusterExtractor
                 Console.WriteLine(pargs.Usage);
                 Console.Read();
                 return;
-            }
+            }*/
 
-            var isJava = pargs.GetValue<bool>("isJava");
+            //var isJava = pargs.GetValue<bool>("isJava");
 
-            int consensus = pargs.GetValue<int>("consensus");
+          //  int consensus = pargs.GetValue<int>("consensus");
             
-            var commaSeperatedClusters = pargs.GetValue<string>("clusters");
-            string[] clusters = commaSeperatedClusters.Split(',');
+            //var commaSeperatedClusters = pargs.GetValue<string>("clusters");
+            string[] clusters = clustersLine.Split(',');
+            string[] newClusters = newClustersLine.Split(',');
             // key<int> is cluster number, value<SortedList<int,int>> is sorted list of points as <pointNumberInList, originalPointNumber>>
             Dictionary<int, SortedList<int, int>> sortedClusterMap =
                 new Dictionary<int, SortedList<int, int>>(clusters.Length);
+            Dictionary<int, int> newMapCounts =
+                new Dictionary<int, int>(newClusters.Length);
             foreach (string cluster in clusters)
             {
                 sortedClusterMap[int.Parse(cluster)] = new SortedList<int, int>();
             }
 
-            using (StreamReader reader = new StreamReader(pargs.GetValue<string>("clusterFile")))
+            for (int i = 0; i < newClusters.Length; i++)
+            {
+                newMapCounts[int.Parse(clusters[i])] = int.Parse(newClusters[i]);
+            }
+            using (StreamReader reader = new StreamReader(clusterFile))
             {
                 char[] sep = { ' ', '\t' };
                 int[] data = new int[2];
@@ -107,16 +138,16 @@ namespace ClusterExtractor
             }
 
 
-            var distFile = pargs.GetValue<string>("distFile");
-            var outDir = pargs.GetValue<string>("outDir");
+           // var distFile = pargs.GetValue<string>("distFile");
+            //var outDir = pargs.GetValue<string>("outDir");
 
 
             if (ExtractPoints(distFile, sortedClusterMap, outDir,
-                pargs.GetValue<int>("bigc"), pargs.GetValue<int>("dataType"), isJava))
+                bigc, dataType, isJava, newMapCounts))
             {
                 Console.WriteLine("Cluster Extraction Completed");
                 Console.WriteLine("  -- Distance Matrix: " + distFile);
-                Console.WriteLine("  -- Clusters: " + commaSeperatedClusters);
+                Console.WriteLine("  -- Clusters: " + clustersLine);
                 Console.WriteLine("  -- Consensus: " + consensus);
                 Console.WriteLine("  -- Output At: " + outDir);
             }
@@ -179,6 +210,40 @@ namespace ClusterExtractor
             return arr;
         }
 
+        private static void WriteConfigFile(string distanceFile, int numPoints, int maxncent, int clusterNumber,string outDir)
+        {
+            string outFile = Path.Combine(new string[] { outDir, "config.properties" + "_" + clusterNumber.ToString()});
+            StreamWriter writer = new StreamWriter(outFile);
+            using (StreamReader reader = new StreamReader(configTemplateFile))
+            {
+                char[] sep = { ' ', '\t' };
+                while (!reader.EndOfStream)
+                {
+                    string line = reader.ReadLine();
+                    string param = line.Trim().Split(sep)[0];
+                    if (param.Equals("DistanceMatrixFile"))
+                    {
+                        writer.WriteLine(line + " " + distanceFile);
+                    }
+                    else if (param.Equals("MaxNcent"))
+                    {
+                        writer.WriteLine(line + " " + maxncent.ToString());
+                    }
+                    else if (param.Equals("NumberDataPoints"))
+                    {
+                        writer.WriteLine(line + " " + numPoints.ToString());
+                    }
+                    else
+                    {
+                        writer.WriteLine(line);
+                    }
+                }
+            }
+
+            writer.Flush();
+            writer.Close();
+        }
+
 
         /// <summary>
         /// Extracts sub distance matrices for each cluster in the sortedClusterMap.
@@ -192,7 +257,7 @@ namespace ClusterExtractor
         ///                    Possible values {0=int16, 1=unit16, 2=double}</param>
 
         private static bool ExtractPoints(string distFile, Dictionary<int, SortedList<int, int>> sortedClusterMap,
-            string outDir, int bigc, int type, bool isJava)
+            string outDir, int bigc, int type, bool isJava, Dictionary<int, int> newclusters)
         {
             Func<FileStream, byte[]> read;
             int tsize;
@@ -240,11 +305,14 @@ namespace ClusterExtractor
                         break;
                 }
             }
-            
 
+            string outrunFile = Path.Combine(new string[] { outDir, "run.sh"});
+            StreamWriter writerrun = new StreamWriter(outrunFile);
             foreach (KeyValuePair<int, SortedList<int, int>> kv in sortedClusterMap)
             {
                 string outFile = Path.Combine(new string[] { outDir, Path.GetFileNameWithoutExtension(distFile) + "_" + kv.Key.ToString() + ".bin" });
+                WriteConfigFile(outFile, kv.Value.Count, newclusters[kv.Key], kv.Key, outDir);
+                writerrun.WriteLine(string.Format(runLine,kv.Key));
                 Int64 readCount = 0;
                 using (FileStream inStream = File.OpenRead(distFile))
                 {
@@ -280,6 +348,8 @@ namespace ClusterExtractor
                     }
                 }
             }
+            writerrun.Flush();
+            writerrun.Close();
             return true;
         }
     }
